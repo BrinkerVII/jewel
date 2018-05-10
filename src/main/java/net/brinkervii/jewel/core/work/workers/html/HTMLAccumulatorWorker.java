@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public final  class HtmlAccumulatorWorker extends JewelWorker {
-	public HtmlAccumulatorWorker(JewelWorkerChain chain) {
+public final  class HTMLAccumulatorWorker extends JewelWorker {
+	public HTMLAccumulatorWorker(JewelWorkerChain chain) {
 		super(chain);
 	}
 
