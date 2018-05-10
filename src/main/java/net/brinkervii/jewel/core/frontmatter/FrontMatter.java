@@ -22,7 +22,7 @@ public class FrontMatter extends Properties {
 			String key = line.substring(0, colonPosition);
 			String value = line.substring(colonPosition + 1);
 
-			put(key.trim(), value.trim());
+			put(key.trim().toLowerCase(), value.trim());
 		}
 	}
 
