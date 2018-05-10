@@ -23,6 +23,8 @@ cwd/
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 
+*.iml
+
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
