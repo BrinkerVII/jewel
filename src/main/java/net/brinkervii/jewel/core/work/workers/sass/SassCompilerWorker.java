@@ -28,7 +28,7 @@ import java.util.Collections;
 public final class SassCompilerWorker extends JewelWorker {
 	private Options options = new Options();
 
-	public SassCompilerWorker(DefaultJewelWorkerChain defaultJewelWorkerChain) {
+	public SassCompilerWorker(DefaultJewelWorkerChain chain) {
 		super(defaultJewelWorkerChain);
 	}
 
