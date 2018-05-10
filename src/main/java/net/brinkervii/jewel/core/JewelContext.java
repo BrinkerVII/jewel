@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core;
 
 import lombok.Data;
+import net.brinkervii.jewel.core.document.HTMLDocument;
 
 import java.io.File;
 import java.util.ArrayList;

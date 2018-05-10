@@ -1,7 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.html;
 
 import net.brinkervii.jewel.core.FileAccumulator;
-import net.brinkervii.jewel.core.HTMLDocument;
+import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.exception.NotADirectoryException;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
