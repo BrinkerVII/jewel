@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.driver;
 
 import net.brinkervii.jewel.core.JewelContext;
+import net.brinkervii.jewel.core.work.workers.CssAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.SassCompilerWorker;
 
 import java.util.ArrayList;
@@ -10,7 +11,9 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 
 	public DefaultJewelWorkerChain(JewelContext context) {
 		super(context);
+
 		add(new SassCompilerWorker(this));
+		add(new CssAccumulatorWorker(this));
 	}
 
 	@Override
