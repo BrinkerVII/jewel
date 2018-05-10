@@ -3,7 +3,7 @@ package net.brinkervii.jewel.core.work.workers;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public final class SASSFilenameFilter implements FilenameFilter {
+public final class SassFilenameFilter implements FilenameFilter {
 	private final static String FILENAME_PATTERN = "^[^_].+\\.scss$";
 
 	@Override

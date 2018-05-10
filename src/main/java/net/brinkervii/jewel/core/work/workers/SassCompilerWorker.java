@@ -25,10 +25,10 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Slf4j
-public final class SASSCompilerWorker extends JewelWorker {
+public final class SassCompilerWorker extends JewelWorker {
 	private Options options = new Options();
 
-	public SASSCompilerWorker(DefaultJewelWorkerChain defaultJewelWorkerChain) {
+	public SassCompilerWorker(DefaultJewelWorkerChain defaultJewelWorkerChain) {
 		super(defaultJewelWorkerChain);
 	}
 
@@ -59,9 +59,9 @@ public final class SASSCompilerWorker extends JewelWorker {
 		options.setImporters(importers);
 
 		try {
-			partialsAccumulator.accumulate(new SASSPartialFilenameFilter());
+			partialsAccumulator.accumulate(new SassPartialFilenameFilter());
 
-			for (File file : accumulator.accumulate(new SASSFilenameFilter()).getFiles()) {
+			for (File file : accumulator.accumulate(new SassFilenameFilter()).getFiles()) {
 				final FileInputStream fileInputStream = new FileInputStream(file);
 				final String scss = IOUtils.toString(fileInputStream, StandardCharsets.UTF_8);
 				fileInputStream.close();
