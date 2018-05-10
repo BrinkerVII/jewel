@@ -1,8 +1,8 @@
 package net.brinkervii.jewel.core.work.driver;
 
 import net.brinkervii.jewel.core.JewelContext;
-import net.brinkervii.jewel.core.work.workers.CssAccumulatorWorker;
-import net.brinkervii.jewel.core.work.workers.SassCompilerWorker;
+import net.brinkervii.jewel.core.work.workers.css.CssAccumulatorWorker;
+import net.brinkervii.jewel.core.work.workers.sass.SassCompilerWorker;
 
 import java.util.ArrayList;
 

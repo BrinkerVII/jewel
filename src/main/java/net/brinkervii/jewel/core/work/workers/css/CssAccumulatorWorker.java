@@ -1,4 +1,4 @@
-package net.brinkervii.jewel.core.work.workers;
+package net.brinkervii.jewel.core.work.workers.css;
 
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.Stylesheet;

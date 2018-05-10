@@ -1,4 +1,4 @@
-package net.brinkervii.jewel.core.work.workers;
+package net.brinkervii.jewel.core.work.workers.sass;
 
 import java.io.File;
 import java.io.FilenameFilter;

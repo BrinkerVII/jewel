@@ -1,4 +1,4 @@
-package net.brinkervii.jewel.core.work.workers;
+package net.brinkervii.jewel.core.work.workers.sass;
 
 import io.bit3.jsass.CompilationException;
 import io.bit3.jsass.Compiler;
