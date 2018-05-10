@@ -29,7 +29,7 @@ public final class SassCompilerWorker extends JewelWorker {
 	private Options options = new Options();
 
 	public SassCompilerWorker(DefaultJewelWorkerChain chain) {
-		super(defaultJewelWorkerChain);
+		super(chain);
 	}
 
 	@Override
