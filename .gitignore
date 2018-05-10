@@ -1,10 +1,3 @@
-
-# Created by https://www.gitignore.io/api/java,intellij
-
-### Intellij ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
 # GIMP files
 *.xcf
 
@@ -106,4 +99,7 @@ target/
 *.db
 
 
-# End of https://www.gitignore.io/api/java,intellij
+# Eclipse JDT
+.settings/
+.classpath
+.project
