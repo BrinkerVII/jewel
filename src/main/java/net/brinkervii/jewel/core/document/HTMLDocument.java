@@ -25,10 +25,15 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		return soup;
 	}
 
+	public boolean isTemplate() {
+		return frontMatter.containsKey("selector");
+	}
+
 	public static HTMLDocument fromFile(File file) throws IOException {
 		HTMLDocument htmlDocument = new HTMLDocument();
 
 		try (FileInputStream inputStream = new FileInputStream(file)) {
+			htmlDocument.sourceFile = file;
 			htmlDocument.setContentString(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			throw e;
