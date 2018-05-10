@@ -27,7 +27,7 @@ public class FrontMatter extends Properties {
 	}
 
 	public String get(String key) {
-		return String.valueOf(get(key));
+		return String.valueOf(get(key.toLowerCase()));
 	}
 
 	public String get(String key, String defaultValue) {

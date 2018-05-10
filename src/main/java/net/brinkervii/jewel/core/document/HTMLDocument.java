@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.document;
 
+import net.brinkervii.jewel.core.exception.NotATemplateException;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -27,6 +28,14 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 
 	public boolean isTemplate() {
 		return frontMatter.containsKey("selector");
+	}
+
+	public String getSelector() throws NotATemplateException {
+		if (!frontMatter.containsKey("selector")) {
+			throw new NotATemplateException(this);
+		}
+
+		return frontMatter.get("selector");
 	}
 
 	public static HTMLDocument fromFile(File file) throws IOException {

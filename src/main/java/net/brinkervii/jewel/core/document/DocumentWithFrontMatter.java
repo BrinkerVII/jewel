@@ -32,4 +32,8 @@ public class DocumentWithFrontMatter {
 	public String getContentString() {
 		return contentString;
 	}
+
+	public String getName() {
+		return "DOCUMENT_WITH_FRONTMATTER";
+	}
 }
