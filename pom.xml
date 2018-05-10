@@ -54,6 +54,13 @@
 			<version>0.11.0</version>
 		</dependency>
 
+		<!-- SASS compiler -->
+		<dependency>
+			<groupId>io.bit3</groupId>
+			<artifactId>jsass</artifactId>
+			<version>5.7.1</version>
+		</dependency>
+
 		<!-- Logging framework -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
