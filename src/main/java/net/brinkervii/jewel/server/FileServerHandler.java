@@ -1,4 +1,4 @@
-package net.brinkervii.jewel.core.server;
+package net.brinkervii.jewel.server;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
