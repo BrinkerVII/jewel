@@ -5,7 +5,7 @@ import net.brinkervii.jewel.core.frontmatter.FrontMatterParser;
 
 import java.io.File;
 
-public class DocumentWithFrontMatter {
+public class DocumentWithFrontMatter extends JewelDocument {
 	protected FrontMatter frontMatter = new FrontMatter();
 	protected String contentString = "";
 	protected File sourceFile;

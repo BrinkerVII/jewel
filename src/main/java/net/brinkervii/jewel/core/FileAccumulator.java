@@ -5,46 +5,71 @@ import net.brinkervii.jewel.core.exception.NotADirectoryException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class FileAccumulator {
-	private final File root;
-	private ArrayList<File> files = new ArrayList<>();
+	private LinkedList<File> roots = new LinkedList<>();
+	private HashMap<File, LinkedList<File>> files = new HashMap<>();
 
 	public FileAccumulator(String root) {
 		this(new File(root));
 	}
 
-	public FileAccumulator(File file) {
-		this.root = file;
+	public FileAccumulator(String... roots) {
+		for (String root : roots) {
+			this.roots.add(new File(root));
+		}
 	}
 
-	private void accumulate(File directory, FilenameFilter filter) throws NotADirectoryException, FileNotFoundException {
+	public FileAccumulator(File... roots) {
+		this.roots.addAll(Arrays.asList(roots));
+	}
+
+	public FileAccumulator(File file) {
+		roots.add(file);
+	}
+
+	public FileAccumulator(LinkedList<File> roots) {
+		this.roots.addAll(roots);
+	}
+
+	private void accumulate(File directory, FilenameFilter filter, File root) throws NotADirectoryException, FileNotFoundException {
 		if (!directory.exists()) throw new FileNotFoundException();
 		if (!directory.isDirectory()) throw new NotADirectoryException();
 
 		for (File file : directory.listFiles()) {
 			if (file.isDirectory()) {
-				accumulate(file, filter);
+				accumulate(file, filter, root);
 			} else if (file.isFile()) {
 				if (filter.accept(file, file.getAbsoluteFile().getName())) {
-					files.add(file);
+					addFile(root, file);
 				}
 			}
 		}
 	}
 
+	private void addFile(File root, File file) {
+		if (!files.containsKey(root)) {
+			files.put(root, new LinkedList<>());
+		}
+
+		files.get(root).add(file);
+	}
+
 	public FileAccumulator accumulate(FilenameFilter filter) throws FileNotFoundException, NotADirectoryException {
-		accumulate(root, filter);
+		for (File root : roots) {
+			accumulate(root, filter, root);
+		}
 		return this;
 	}
 
-	public File[] getFiles() {
-		File[] arrayFiles = new File[files.size()];
-		for (int i = 0; i < files.size(); i++) {
-			arrayFiles[i] = files.get(i);
-		}
+	public HashMap<File, LinkedList<File>> getFiles() {
+		return files;
+	}
 
-		return arrayFiles;
+	public FileAccumulator duplicate() {
+		return new FileAccumulator(roots);
 	}
 }

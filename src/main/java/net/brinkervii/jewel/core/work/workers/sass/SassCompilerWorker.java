@@ -8,7 +8,8 @@ import io.bit3.jsass.importer.Import;
 import io.bit3.jsass.importer.Importer;
 import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.FileAccumulator;
-import net.brinkervii.jewel.core.Stylesheet;
+import net.brinkervii.jewel.core.config.JewelConfiguration;
+import net.brinkervii.jewel.core.document.Stylesheet;
 import net.brinkervii.jewel.core.exception.NotADirectoryException;
 import net.brinkervii.jewel.core.work.driver.DefaultJewelWorkerChain;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
@@ -36,8 +37,9 @@ public final class SassCompilerWorker extends JewelWorker {
 	public void run() {
 		log.info("Running SASS compiler");
 
-		FileAccumulator accumulator = new FileAccumulator("theme/style");
-		FileAccumulator partialsAccumulator = new FileAccumulator("theme/style");
+		final JewelConfiguration config = chain.getContext().config();
+		FileAccumulator accumulator = new FileAccumulator(config.getThemeLocation(), config.getSourceLocation());
+		FileAccumulator partialsAccumulator = accumulator.duplicate();
 
 		Collection<Importer> importers = Collections.singleton((url, previous) -> {
 			final URI importUri = previous.getImportUri();
@@ -63,28 +65,28 @@ public final class SassCompilerWorker extends JewelWorker {
 		try {
 			partialsAccumulator.accumulate(new SassPartialFilenameFilter());
 
-			for (File file : accumulator.accumulate(new SassFilenameFilter()).getFiles()) {
-				final FileInputStream fileInputStream = new FileInputStream(file);
-				final String scss = IOUtils.toString(fileInputStream, StandardCharsets.UTF_8);
-				fileInputStream.close();
+			accumulator.accumulate(new SassFilenameFilter()).getFiles().forEach((root, files) -> {
+				for (File file : files) {
+					final FileInputStream fileInputStream;
+					try {
+						fileInputStream = new FileInputStream(file);
+						final String scss = IOUtils.toString(fileInputStream, StandardCharsets.UTF_8);
+						fileInputStream.close();
 
-				final Compiler compiler = new Compiler();
-				final Output output = compiler.compileFile(file.toURI(), new URI("out.css"), options);
+						final Compiler compiler = new Compiler();
+						final Output output = compiler.compileFile(file.toURI(), new URI("out.css"), options);
 
-				final Stylesheet stylesheet = Stylesheet.withContent(output.getCss());
-				stylesheet.setSourceMap(output.getSourceMap());
-				chain.getContext().stylesheet(stylesheet);
-				log.info(String.format("Added compiled SASS file %s", file.getName()));
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (NotADirectoryException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CompilationException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+						final Stylesheet stylesheet = Stylesheet.withContent(root, output.getCss());
+						stylesheet.setSourceMap(output.getSourceMap());
+						chain.getContext().stylesheet(stylesheet);
+						log.info(String.format("Added compiled SASS file %s", file.getName()));
+					} catch (IOException | CompilationException | URISyntaxException e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+		} catch (FileNotFoundException | NotADirectoryException e) {
 			e.printStackTrace();
 		}
 	}

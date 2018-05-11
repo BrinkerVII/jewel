@@ -31,9 +31,6 @@ public final class HTMLWriterWorker extends JewelWorker {
 	public void run() {
 		log.info("Running HTML Writer");
 
-		final File themeDirectory = new File("theme");
-		final Path themePath = Paths.get(themeDirectory.getAbsolutePath());
-
 		this.components = chain.getContext().getComponents();
 
 		for (HTMLDocument htmlDocument : chain.getContext().getHtmlDocuments()) {
@@ -62,8 +59,9 @@ public final class HTMLWriterWorker extends JewelWorker {
 					htmlDocument.soupToContentString();
 				}
 
+				final Path originPath = Paths.get(htmlDocument.getOrigin().getAbsolutePath());
 				final Path sourceFilePath = Paths.get(htmlDocument.getSourceFile().getAbsolutePath());
-				final Path relativePath = themePath.relativize(sourceFilePath);
+				final Path relativePath = originPath.relativize(sourceFilePath);
 				final Path outputPath = Paths.get(chain.getContext().getOutputDirectory().getAbsolutePath().toString(), relativePath.toString());
 
 				try (FileOutputStream outputStream = new FileOutputStream(new File(outputPath.toString()))) {

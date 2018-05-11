@@ -14,11 +14,12 @@ import java.nio.file.Paths;
 public class FileServerHandler implements HttpHandler {
 	private final static String BAD_REQUEST = "Bad Request";
 	private final static String FOUR_O_FOUR = "404 rest in rip";
-	private final static File HTTP_ROOT = new File("site");
+	private final File HTTP_ROOT;
 	private final JewelContext context;
 
 	public FileServerHandler(JewelContext context) {
 		this.context = context;
+		HTTP_ROOT = new File(context.config().getSiteLocation());
 	}
 
 	@Override

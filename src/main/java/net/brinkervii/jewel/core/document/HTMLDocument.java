@@ -42,8 +42,9 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		return frontMatter.get("selector");
 	}
 
-	public static HTMLDocument fromFile(File file) throws IOException {
+	public static HTMLDocument fromFile(File origin, File file) throws IOException {
 		HTMLDocument htmlDocument = new HTMLDocument();
+		htmlDocument.origin = origin;
 
 		try (FileInputStream inputStream = new FileInputStream(file)) {
 			htmlDocument.sourceFile = file;

@@ -1,4 +1,4 @@
-package net.brinkervii.jewel.core;
+package net.brinkervii.jewel.core.document;
 
 import org.apache.commons.io.IOUtils;
 
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-public class Stylesheet {
+public class Stylesheet extends JewelDocument {
 	private String content = null;
 	private File file = null;
 	private String sourceMap = "";
@@ -53,9 +53,10 @@ public class Stylesheet {
 		return content;
 	}
 
-	public static Stylesheet withContent(String content) {
+	public static Stylesheet withContent(File origin, String content) {
 		Stylesheet stylesheet = new Stylesheet();
 		stylesheet.content = content;
+		stylesheet.origin = origin;
 
 		return stylesheet;
 	}

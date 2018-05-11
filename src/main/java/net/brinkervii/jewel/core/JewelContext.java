@@ -1,10 +1,14 @@
 package net.brinkervii.jewel.core;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.HTMLDocument;
+import net.brinkervii.jewel.core.document.Stylesheet;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,8 +17,10 @@ import java.util.List;
 public class JewelContext {
 	private ArrayList<Stylesheet> stylesheets = new ArrayList<>();
 	private ArrayList<HTMLDocument> htmlDocuments = new ArrayList<>();
-	private File outputDirectory = new File("site");
+	private File outputDirectory = null;
 	private JewelWorkerChain activeChain;
+	private ObjectMapper objectMapper = new ObjectMapper();
+	private JewelConfiguration config = null;
 
 	public void stylesheet(Stylesheet stylesheet) {
 		stylesheets.add(stylesheet);
@@ -42,5 +48,36 @@ public class JewelContext {
 		}
 
 		return components;
+	}
+
+	public JewelConfiguration config() {
+		if (this.config == null) {
+			this.config = new JewelConfiguration();
+
+			File configurationFile = new File("jewel_config.json");
+			if (configurationFile.exists()) {
+				try {
+					this.config = objectMapper.readValue(configurationFile, JewelConfiguration.class);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					objectMapper.writeValue(configurationFile, this.config);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return this.config;
+	}
+
+	public File getOutputDirectory() {
+		if (this.outputDirectory == null) {
+			this.outputDirectory = new File(config().getSiteLocation());
+		}
+
+		return this.outputDirectory;
 	}
 }
