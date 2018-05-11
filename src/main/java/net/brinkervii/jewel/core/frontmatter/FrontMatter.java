@@ -9,6 +9,10 @@ public class FrontMatter extends Properties {
 	public void load(String frontMatterString) {
 		String withoutCarriageReturns = frontMatterString.replaceAll("\r", "");
 		for (String line : withoutCarriageReturns.split("\n")) {
+			if (!line.contains(":")) continue;
+
+			// Process the line manually, this is more reliable than regex and string splitting.
+			// We want to be able to have colons in values.
 			int colonPosition = 0;
 			final char[] chars = line.toCharArray();
 
@@ -27,7 +31,7 @@ public class FrontMatter extends Properties {
 	}
 
 	public String get(String key) {
-		return String.valueOf(get(key.toLowerCase()));
+		return String.valueOf(super.get(key.toLowerCase()));
 	}
 
 	public String get(String key, String defaultValue) {
