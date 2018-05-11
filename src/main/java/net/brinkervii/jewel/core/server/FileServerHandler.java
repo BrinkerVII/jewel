@@ -69,7 +69,7 @@ public class FileServerHandler implements HttpHandler {
 	}
 
 	private void serveFile(HttpExchange httpExchange, File file) throws IOException {
-		log.info("Serving file");
+		log.info("Serving file " + file.getName());
 
 		FileInputStream inputStream = new FileInputStream(file);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
