@@ -1,13 +1,9 @@
 package net.brinkervii.jewel.core.work.workers.css;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import net.brinkervii.jewel.core.ExtensionFilenameFilter;
 
-public final class CssFilenameFilter implements FilenameFilter {
-	private final static String FILENAME_PATTERN = ".*\\.css$";
-
-	@Override
-	public boolean accept(File file, String s) {
-		return s.matches(FILENAME_PATTERN);
+public final class CssFilenameFilter extends ExtensionFilenameFilter {
+	public CssFilenameFilter() {
+		super("css");
 	}
 }
