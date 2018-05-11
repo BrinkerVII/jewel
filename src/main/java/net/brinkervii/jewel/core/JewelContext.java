@@ -21,6 +21,14 @@ public class JewelContext {
 	}
 
 	public void htmlDocument(HTMLDocument document) {
+		LinkedList<HTMLDocument> rubbish = new LinkedList<>();
+		for (HTMLDocument htmlDocument : htmlDocuments) {
+			if (htmlDocument.getSourceFile().toString().equals(document.getSourceFile().toString())) {
+				rubbish.add(htmlDocument);
+			}
+		}
+
+		htmlDocuments.removeAll(rubbish);
 		htmlDocuments.add(document);
 	}
 

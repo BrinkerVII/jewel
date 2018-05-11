@@ -20,6 +20,7 @@ public class JewelServer {
 		InetSocketAddress address = new InetSocketAddress(6969);
 		this.server = HttpServer.create(address, 0);
 		server.createContext("/", new FileServerHandler(context));
+		server.createContext("/regenerate", new RegenerateServerHandler(context));
 
 		server.setExecutor(null);
 
