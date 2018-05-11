@@ -10,7 +10,7 @@ public class RegexFilenameFilter implements FilenameFilter {
 		patterns = new String[]{pattern};
 	}
 
-	public RegexFilenameFilter(String[] patterns) {
+	public RegexFilenameFilter(String... patterns) {
 		this.patterns = patterns;
 	}
 
