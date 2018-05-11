@@ -4,7 +4,6 @@ import net.brinkervii.jewel.core.exception.NotAComponentException;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,11 +56,6 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 	}
 
 	public void soupToContentString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (Element element : soup.body().children()) {
-			stringBuilder.append(element.outerHtml());
-		}
-
-		this.contentString = stringBuilder.toString();
+		this.contentString = soup.outerHtml();
 	}
 }

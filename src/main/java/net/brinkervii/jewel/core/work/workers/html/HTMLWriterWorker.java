@@ -51,7 +51,9 @@ public final class HTMLWriterWorker extends JewelWorker {
 					Element parent = element.parent();
 					element.remove();
 
-					parent.appendChild(component.getSoup());
+					for (Element componentChild : component.getSoup().body().children()) {
+						parent.appendChild(componentChild);
+					}
 					changedSoup = true;
 				}
 
