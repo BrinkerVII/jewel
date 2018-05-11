@@ -73,6 +73,16 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		return document;
 	}
 
+	public static HTMLDocument fromString(File origin, File sourceFile, String s, DocumentWithFrontMatter previous) {
+		HTMLDocument document = new HTMLDocument();
+		document.origin = origin;
+		document.sourceFile = sourceFile;
+		document.previous = previous;
+		document.setContentString(s);
+
+		return document;
+	}
+
 	public void soupToContentString() {
 		this.contentString = soup.outerHtml();
 	}

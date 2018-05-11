@@ -9,6 +9,7 @@ public class DocumentWithFrontMatter extends JewelDocument {
 	protected FrontMatter frontMatter = new FrontMatter();
 	protected String contentString = "";
 	protected File sourceFile;
+	protected DocumentWithFrontMatter previous;
 
 	public FrontMatter getFrontMatter() {
 		return frontMatter;
@@ -35,5 +36,9 @@ public class DocumentWithFrontMatter extends JewelDocument {
 
 	public String getName() {
 		return "DOCUMENT_WITH_FRONTMATTER";
+	}
+
+	public DocumentWithFrontMatter getPrevious() {
+		return previous;
 	}
 }

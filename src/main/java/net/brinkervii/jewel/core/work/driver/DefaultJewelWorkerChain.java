@@ -4,6 +4,7 @@ import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.jewel.core.work.workers.OutputDirectoryStructureWorker;
 import net.brinkervii.jewel.core.work.workers.css.CssAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.html.HTMLAccumulatorWorker;
+import net.brinkervii.jewel.core.work.workers.html.HTMLTemplateProcessorWorker;
 import net.brinkervii.jewel.core.work.workers.html.HTMLWriterWorker;
 import net.brinkervii.jewel.core.work.workers.md.MarkdownAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.md.MarkdownRendererWorker;
@@ -23,6 +24,7 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 		add(new MarkdownAccumulatorWorker(this));
 		add(new OutputDirectoryStructureWorker(this));
 		add(new MarkdownRendererWorker(this));
+		add(new HTMLTemplateProcessorWorker(this));
 		add(new HTMLWriterWorker(this));
 	}
 

@@ -44,7 +44,13 @@ public class MarkdownRendererWorker extends JewelWorker {
 				contentTag.remove();
 			}
 
-			chain.getContext().htmlDocument(HTMLDocument.fromString(document.getOrigin(), FileUtil.changeExtension(document.getSourceFile(), "html"), resultDOM.outerHtml()));
+			chain.getContext().htmlDocument(
+				HTMLDocument.fromString(
+					document.getOrigin(),
+					FileUtil.changeExtension(document.getSourceFile(), "html"),
+					resultDOM.outerHtml(), document
+				)
+			);
 		}
 	}
 
