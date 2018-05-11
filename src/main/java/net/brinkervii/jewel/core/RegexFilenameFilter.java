@@ -4,14 +4,22 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 public class RegexFilenameFilter implements FilenameFilter {
-	protected final String pattern;
+	protected final String[] patterns;
 
 	public RegexFilenameFilter(String pattern) {
-		this.pattern = pattern;
+		patterns = new String[]{pattern};
+	}
+
+	public RegexFilenameFilter(String[] patterns) {
+		this.patterns = patterns;
 	}
 
 	@Override
 	public boolean accept(File file, String s) {
-		return s.matches(pattern);
+		for (String pattern : patterns) {
+			if (s.matches(pattern)) return true;
+		}
+
+		return false;
 	}
 }

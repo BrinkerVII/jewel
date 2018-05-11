@@ -20,7 +20,7 @@ public final class MDAccumulatorWorker extends JewelWorker {
 		final JewelConfiguration config = chain.getContext().config();
 		FileAccumulator accumulator = new FileAccumulator(config.getThemeLocation(), config.getSourceLocation());
 		try {
-			accumulator.accumulate(new MDFilenameFilter()).accumulate(new MarkdownFilenameFilter());
+			accumulator.accumulate(new MarkdownFilenameFilter());
 
 			accumulator.getFiles().forEach((root, files) -> {
 				for (File file : files) {

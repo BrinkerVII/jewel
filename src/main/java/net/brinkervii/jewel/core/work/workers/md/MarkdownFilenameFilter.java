@@ -4,6 +4,6 @@ import net.brinkervii.jewel.core.ExtensionFilenameFilter;
 
 public final class MarkdownFilenameFilter extends ExtensionFilenameFilter {
 	public MarkdownFilenameFilter() {
-		super("markdown");
+		super("markdown", "md");
 	}
 }
