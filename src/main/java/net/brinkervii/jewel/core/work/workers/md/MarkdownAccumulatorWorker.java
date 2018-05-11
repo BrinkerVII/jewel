@@ -10,8 +10,8 @@ import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public final class MDAccumulatorWorker extends JewelWorker {
-	public MDAccumulatorWorker(JewelWorkerChain chain) {
+public final class MarkdownAccumulatorWorker extends JewelWorker {
+	public MarkdownAccumulatorWorker(JewelWorkerChain chain) {
 		super(chain);
 	}
 
