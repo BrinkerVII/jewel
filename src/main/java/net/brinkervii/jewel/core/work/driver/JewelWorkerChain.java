@@ -16,7 +16,7 @@ public abstract class JewelWorkerChain {
 	}
 
 	public void work() {
-		log.warn("A JewelWorkerChain is being ran without the work method being implemented...");
+		context.setActiveChain(this);
 	}
 
 	public JewelContext getContext() {

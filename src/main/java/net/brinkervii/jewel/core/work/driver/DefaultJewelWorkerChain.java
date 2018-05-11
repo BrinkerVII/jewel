@@ -3,8 +3,8 @@ package net.brinkervii.jewel.core.work.driver;
 import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.jewel.core.work.workers.OutputDirectoryStructureWorker;
 import net.brinkervii.jewel.core.work.workers.css.CssAccumulatorWorker;
-import net.brinkervii.jewel.core.work.workers.html.HTMLWriterWorker;
 import net.brinkervii.jewel.core.work.workers.html.HTMLAccumulatorWorker;
+import net.brinkervii.jewel.core.work.workers.html.HTMLWriterWorker;
 import net.brinkervii.jewel.core.work.workers.sass.SassCompilerWorker;
 
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 
 	@Override
 	public void work() {
+		super.work();
 		for (JewelWorker worker : workers) {
 			worker.run();
 		}
