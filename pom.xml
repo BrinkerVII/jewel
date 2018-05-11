@@ -61,6 +61,14 @@
 			<version>5.7.1</version>
 		</dependency>
 
+		<!-- CSS Parser -->
+		<dependency>
+			<groupId>net.sourceforge.cssparser</groupId>
+			<artifactId>cssparser</artifactId>
+			<version>0.9.25</version>
+		</dependency>
+
+
 		<!-- HTML parsing -->
 		<dependency>
 			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
