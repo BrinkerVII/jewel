@@ -34,6 +34,14 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		return frontMatter.containsKey("selector");
 	}
 
+	public boolean isLayout() {
+		return frontMatter.containsKey("layout");
+	}
+
+	public boolean shouldWrite() {
+		return !isLayout() && !isComponent();
+	}
+
 	public String getSelector() throws NotAComponentException {
 		if (!frontMatter.containsKey("selector")) {
 			throw new NotAComponentException(this);
@@ -54,6 +62,15 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		}
 
 		return htmlDocument;
+	}
+
+	public static HTMLDocument fromString(File origin, File sourceFile, String s) {
+		HTMLDocument document = new HTMLDocument();
+		document.origin = origin;
+		document.sourceFile = sourceFile;
+		document.setContentString(s);
+
+		return document;
 	}
 
 	public void soupToContentString() {

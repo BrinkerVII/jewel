@@ -34,7 +34,7 @@ public final class HTMLWriterWorker extends JewelWorker {
 		this.components = chain.getContext().getComponents();
 
 		for (HTMLDocument htmlDocument : chain.getContext().getHtmlDocuments()) {
-			if (!htmlDocument.isComponent()) {
+			if (htmlDocument.shouldWrite()) {
 				log.info(String.format("Writing HTML file %s", htmlDocument.getName()));
 
 				final Document soup = htmlDocument.getSoup();

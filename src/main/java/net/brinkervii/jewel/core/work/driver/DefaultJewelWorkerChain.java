@@ -6,6 +6,7 @@ import net.brinkervii.jewel.core.work.workers.css.CssAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.html.HTMLAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.html.HTMLWriterWorker;
 import net.brinkervii.jewel.core.work.workers.md.MarkdownAccumulatorWorker;
+import net.brinkervii.jewel.core.work.workers.md.MarkdownRendererWorker;
 import net.brinkervii.jewel.core.work.workers.sass.SassCompilerWorker;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 		add(new HTMLAccumulatorWorker(this));
 		add(new MarkdownAccumulatorWorker(this));
 		add(new OutputDirectoryStructureWorker(this));
+		add(new MarkdownRendererWorker(this));
 		add(new HTMLWriterWorker(this));
 	}
 
