@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.HTMLDocument;
+import net.brinkervii.jewel.core.document.MarkdownDocument;
 import net.brinkervii.jewel.core.document.Stylesheet;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class JewelContext {
 	private ArrayList<Stylesheet> stylesheets = new ArrayList<>();
 	private ArrayList<HTMLDocument> htmlDocuments = new ArrayList<>();
+	private ArrayList<MarkdownDocument> markdownDocuments = new ArrayList<>();
 	private File outputDirectory = null;
 	private JewelWorkerChain activeChain;
 	private ObjectMapper objectMapper = new ObjectMapper();
@@ -36,6 +38,18 @@ public class JewelContext {
 
 		htmlDocuments.removeAll(rubbish);
 		htmlDocuments.add(document);
+	}
+
+	public void markdown(MarkdownDocument document) {
+		LinkedList<MarkdownDocument> rubbish = new LinkedList<>();
+		for (MarkdownDocument markdownDocument : markdownDocuments) {
+			if (markdownDocument.getSourceFile().toString().equals(document.getSourceFile().toString())) {
+				rubbish.add(markdownDocument);
+			}
+		}
+
+		markdownDocuments.removeAll(rubbish);
+		markdownDocuments.add(document);
 	}
 
 	public List<HTMLDocument> getComponents() {
