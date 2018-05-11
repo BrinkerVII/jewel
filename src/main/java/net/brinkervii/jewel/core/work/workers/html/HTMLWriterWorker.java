@@ -29,6 +29,8 @@ public final class HTMLWriterWorker extends JewelWorker {
 
 	@Override
 	public void run() {
+		log.info("Running HTML Writer");
+
 		final File themeDirectory = new File("theme");
 		final Path themePath = Paths.get(themeDirectory.getAbsolutePath());
 
@@ -36,6 +38,8 @@ public final class HTMLWriterWorker extends JewelWorker {
 
 		for (HTMLDocument htmlDocument : chain.getContext().getHtmlDocuments()) {
 			if (!htmlDocument.isTemplate()) {
+				log.info(String.format("Writing HTML file %s", htmlDocument.getName()));
+
 				final Document soup = htmlDocument.getSoup();
 				boolean changedSoup = false;
 

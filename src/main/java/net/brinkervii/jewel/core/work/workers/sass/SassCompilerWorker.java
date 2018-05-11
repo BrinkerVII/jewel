@@ -34,6 +34,8 @@ public final class SassCompilerWorker extends JewelWorker {
 
 	@Override
 	public void run() {
+		log.info("Running SASS compiler");
+
 		FileAccumulator accumulator = new FileAccumulator("theme/style");
 		FileAccumulator partialsAccumulator = new FileAccumulator("theme/style");
 
@@ -72,6 +74,7 @@ public final class SassCompilerWorker extends JewelWorker {
 				final Stylesheet stylesheet = Stylesheet.withContent(output.getCss());
 				stylesheet.setSourceMap(output.getSourceMap());
 				chain.getContext().stylesheet(stylesheet);
+				log.info(String.format("Added compiled SASS file %s", file.getName()));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

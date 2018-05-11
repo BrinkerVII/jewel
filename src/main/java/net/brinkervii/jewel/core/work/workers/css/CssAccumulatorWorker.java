@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.work.workers.css;
 
+import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.Stylesheet;
 import net.brinkervii.jewel.core.exception.NotADirectoryException;
@@ -13,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+@Slf4j
 public final class CssAccumulatorWorker extends JewelWorker {
 	public CssAccumulatorWorker(JewelWorkerChain chain) {
 		super(chain);
@@ -20,6 +22,8 @@ public final class CssAccumulatorWorker extends JewelWorker {
 
 	@Override
 	public void run() {
+		log.info("Running CSS Accumulator");
+
 		FileAccumulator accumulator = new FileAccumulator("theme/style");
 		try {
 			for (File file : accumulator.accumulate(new CssFilenameFilter()).getFiles()) {
@@ -29,6 +33,7 @@ public final class CssAccumulatorWorker extends JewelWorker {
 					final String s = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
 					chain.getContext().stylesheet(Stylesheet.withContent(s));
+					log.info(String.format("Added CSS file %s", file.getName()));
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
