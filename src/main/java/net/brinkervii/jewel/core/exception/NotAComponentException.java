@@ -4,10 +4,10 @@ import net.brinkervii.jewel.core.document.HTMLDocument;
 
 import java.io.File;
 
-public class NotATemplateException extends Throwable {
+public class NotAComponentException extends Throwable {
 	private final HTMLDocument document;
 
-	public NotATemplateException(HTMLDocument document) {
+	public NotAComponentException(HTMLDocument document) {
 		this.document = document;
 	}
 
@@ -19,6 +19,6 @@ public class NotATemplateException extends Throwable {
 			documentName = sourceFile.getName();
 		}
 
-		return String.format("Document '%s' is not an HTML template. Are you missing the selector property in the frontmatter?", documentName);
+		return String.format("Document '%s' is not an HTML component. Are you missing the selector property in the frontmatter?", documentName);
 	}
 }

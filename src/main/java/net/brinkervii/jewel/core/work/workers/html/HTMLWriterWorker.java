@@ -2,7 +2,7 @@ package net.brinkervii.jewel.core.work.workers.html;
 
 import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.document.HTMLDocument;
-import net.brinkervii.jewel.core.exception.NotATemplateException;
+import net.brinkervii.jewel.core.exception.NotAComponentException;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 import org.apache.commons.io.IOUtils;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @Slf4j
 public final class HTMLWriterWorker extends JewelWorker {
-	private List<HTMLDocument> templates = new LinkedList<>();
+	private List<HTMLDocument> components = new LinkedList<>();
 
 	public HTMLWriterWorker(JewelWorkerChain chain) {
 		super(chain);
@@ -34,24 +34,24 @@ public final class HTMLWriterWorker extends JewelWorker {
 		final File themeDirectory = new File("theme");
 		final Path themePath = Paths.get(themeDirectory.getAbsolutePath());
 
-		this.templates = chain.getContext().getTemplates();
+		this.components = chain.getContext().getComponents();
 
 		for (HTMLDocument htmlDocument : chain.getContext().getHtmlDocuments()) {
-			if (!htmlDocument.isTemplate()) {
+			if (!htmlDocument.isComponent()) {
 				log.info(String.format("Writing HTML file %s", htmlDocument.getName()));
 
 				final Document soup = htmlDocument.getSoup();
 				boolean changedSoup = false;
 
-				// Merge templates with main document
+				// Merge components with main document
 				for (Element element : soup.getAllElements()) {
-					HTMLDocument template = haveTemplate(element.nodeName());
-					if (template == null) continue;
+					HTMLDocument component = findComponent(element.nodeName());
+					if (component == null) continue;
 
 					Element parent = element.parent();
 					element.remove();
 
-					parent.appendChild(template.getSoup());
+					parent.appendChild(component.getSoup());
 					changedSoup = true;
 				}
 
@@ -75,13 +75,13 @@ public final class HTMLWriterWorker extends JewelWorker {
 		}
 	}
 
-	private HTMLDocument haveTemplate(String name) {
-		for (HTMLDocument template : templates) {
+	private HTMLDocument findComponent(String name) {
+		for (HTMLDocument component : components) {
 			try {
-				if (template.getSelector().equals(name)) {
-					return template;
+				if (component.getSelector().equals(name)) {
+					return component;
 				}
-			} catch (NotATemplateException e) {
+			} catch (NotAComponentException e) {
 				log.warn("Could not get selector: " + e.toString());
 			}
 		}

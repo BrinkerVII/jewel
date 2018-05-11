@@ -1,6 +1,6 @@
 package net.brinkervii.jewel.core.document;
 
-import net.brinkervii.jewel.core.exception.NotATemplateException;
+import net.brinkervii.jewel.core.exception.NotAComponentException;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,13 +31,13 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		return soup;
 	}
 
-	public boolean isTemplate() {
+	public boolean isComponent() {
 		return frontMatter.containsKey("selector");
 	}
 
-	public String getSelector() throws NotATemplateException {
+	public String getSelector() throws NotAComponentException {
 		if (!frontMatter.containsKey("selector")) {
-			throw new NotATemplateException(this);
+			throw new NotAComponentException(this);
 		}
 
 		return frontMatter.get("selector");

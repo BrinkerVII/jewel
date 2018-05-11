@@ -22,15 +22,15 @@ public class JewelContext {
 		htmlDocuments.add(document);
 	}
 
-	public List<HTMLDocument> getTemplates() {
-		LinkedList<HTMLDocument> templates = new LinkedList<>();
+	public List<HTMLDocument> getComponents() {
+		LinkedList<HTMLDocument> components = new LinkedList<>();
 
 		for (HTMLDocument htmlDocument : htmlDocuments) {
-			if (htmlDocument.isTemplate()) {
-				templates.add(htmlDocument);
+			if (htmlDocument.isComponent()) {
+				components.add(htmlDocument);
 			}
 		}
 
-		return templates;
+		return components;
 	}
 }
