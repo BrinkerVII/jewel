@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 @Slf4j
 public class FileServerHandler implements HttpHandler {
-	private final static String RESPONSE = "Hello world!";
+	private final static String BAD_REQUEST = "Bad Request";
 	private final static String FOUR_O_FOUR = "404 rest in rip";
 	private final static File HTTP_ROOT = new File("site");
 	private final JewelContext context;
@@ -23,6 +23,11 @@ public class FileServerHandler implements HttpHandler {
 
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
+		if (!httpExchange.getRequestMethod().toUpperCase().equals("GET")) {
+			serveBadRequest(httpExchange);
+			return;
+		}
+
 		final URI requestURI = httpExchange.getRequestURI();
 		File file = new File(Paths.get(HTTP_ROOT.getAbsolutePath(), requestURI.toString()).toAbsolutePath().toString());
 		if (file.isDirectory()) {
@@ -36,6 +41,17 @@ public class FileServerHandler implements HttpHandler {
 			serveFile(httpExchange, file);
 		} else {
 			serve404(httpExchange, file);
+		}
+	}
+
+	private void serveBadRequest(HttpExchange httpExchange) throws IOException {
+		log.info("Serving 400 (BAD REQUEST)");
+
+		httpExchange.sendResponseHeaders(400, BAD_REQUEST.length());
+		try (OutputStream outputStream = httpExchange.getResponseBody()) {
+			outputStream.write(BAD_REQUEST.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
