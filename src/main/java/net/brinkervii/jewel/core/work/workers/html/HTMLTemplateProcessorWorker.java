@@ -22,6 +22,10 @@ public class HTMLTemplateProcessorWorker extends JewelWorker {
 			HashMap<String, Object> provider = new HashMap<>();
 			DocumentWithFrontMatter fmdocument = document;
 
+			if(document.getSoup().toString().contains("my first")) {
+				int bp = 0;
+			}
+
 			HashMap<String, Object> pageProperties = new HashMap<>();
 			while (fmdocument != null) {
 				fmdocument.getFrontMatter().forEach((k, v) -> {
