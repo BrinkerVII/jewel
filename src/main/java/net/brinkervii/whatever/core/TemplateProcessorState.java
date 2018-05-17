@@ -1,4 +1,4 @@
-package net.brinkervii.whatever;
+package net.brinkervii.whatever.core;
 
 import lombok.Data;
 

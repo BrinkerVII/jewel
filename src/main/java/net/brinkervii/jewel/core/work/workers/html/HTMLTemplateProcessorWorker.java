@@ -4,7 +4,7 @@ import net.brinkervii.jewel.core.document.DocumentWithFrontMatter;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
-import net.brinkervii.whatever.TemplateProcessor;
+import net.brinkervii.whatever.core.TemplateProcessor;
 import org.jsoup.nodes.Document;
 
 import java.util.HashMap;

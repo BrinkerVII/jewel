@@ -1,6 +1,7 @@
-package net.brinkervii.whatever;
+package net.brinkervii.whatever.core;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.whatever.stache.StacheElementProcessor;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +15,6 @@ import java.util.regex.Pattern;
 @Slf4j
 public class TemplateProcessor {
 	private static final Pattern STACHE_PATTERN_OUTER = Pattern.compile("(\\{\\{\\s*.*?\\s*}})");
-	private static final Pattern STACHE_PATTERN_INNER = Pattern.compile("\\{\\{\\s*(.*?)\\s*}}");
 	private LinkedList<Map<String, Object>> providers = new LinkedList<>();
 
 	public void provide(Map<String, Object> provider) {
@@ -30,7 +30,28 @@ public class TemplateProcessor {
 			log.info(String.format("Got some candidate(s) in template, %d", n_candidates));
 		}
 
+		processCandidates(state);
+
 		return input;
+	}
+
+	private void processCandidates(TemplateProcessorState state) {
+		List<Runnable> tasks = new LinkedList<>();
+
+		for (CandidateEntry candidateEntry : state.getCandidates()) {
+			switch (candidateEntry.getCandidateType()) {
+				case STACHE:
+					StacheElementProcessor stacheElementProcessor = new StacheElementProcessor(this);
+					tasks.add(() -> {
+						stacheElementProcessor.process(candidateEntry.getNode());
+					});
+					break;
+				case FORLOOP:
+					break;
+			}
+		}
+
+		tasks.forEach(Runnable::run);
 	}
 
 	private void getCandidates(Document input, TemplateProcessorState state) {
@@ -54,5 +75,15 @@ public class TemplateProcessor {
 				}
 			}
 		}
+	}
+
+	public Object getValue(String key, Object defaultValue) {
+		for (Map<String, Object> provider : providers) {
+			if (provider.containsKey(key)) {
+				return provider.get(key);
+			}
+		}
+
+		return defaultValue;
 	}
 }
