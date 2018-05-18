@@ -34,7 +34,15 @@ public class FileServerServlet extends Servlet {
 	public Response get(Request request) {
 		Response response = new Response();
 
-		final File file = getFile(request);
+		File file = getFile(request);
+		if (file.isDirectory()) {
+			File indexFile = new File(file, "index.html");
+			if (indexFile.exists()) {
+				file = indexFile;
+				indexFile = null;
+			}
+		}
+
 		try (FileInputStream fileInputStream = new FileInputStream(file)) {
 			byte[] bytes = new byte[(int) file.length()];
 			IOUtils.readFully(fileInputStream, bytes);
