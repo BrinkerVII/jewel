@@ -64,7 +64,17 @@ public final class HTMLWriterWorker extends JewelWorker {
 				final Path relativePath = originPath.relativize(sourceFilePath);
 				final Path outputPath = Paths.get(chain.getContext().getOutputDirectory().getAbsolutePath().toString(), relativePath.toString());
 
-				try (FileOutputStream outputStream = new FileOutputStream(new File(outputPath.toString()))) {
+				final File outfile = new File(outputPath.toString());
+				if (!outfile.exists()) {
+					final File parentFile = outfile.getParentFile();
+					if (!parentFile.exists()) {
+						if (!parentFile.mkdirs()) {
+							log.error("Tried to make directories, but its all broken from here");
+						}
+					}
+				}
+
+				try (FileOutputStream outputStream = new FileOutputStream(outfile)) {
 					IOUtils.write(htmlDocument.getContentString(), outputStream, StandardCharsets.UTF_8);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
