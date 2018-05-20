@@ -5,6 +5,7 @@ import net.brinkervii.whatever.stache.piping.StachePipelineState;
 import org.jsoup.nodes.Element;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ValuePipeSegment extends StachePipelineStage {
 	public ValuePipeSegment(StachePipelineState state, String bit) {
@@ -31,7 +32,7 @@ public class ValuePipeSegment extends StachePipelineStage {
 		}
 
 		if (result != null) {
-			work.text(result.toString());
+			work.text(work.ownText().replaceAll(String.format("\\{\\{\\s*%s\\s*}}", bit), result.toString()));
 		}
 
 		return work;
