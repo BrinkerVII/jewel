@@ -6,6 +6,8 @@ import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.document.MarkdownDocument;
 import net.brinkervii.jewel.core.document.Stylesheet;
+import net.brinkervii.jewel.core.exception.NoChainConstructorException;
+import net.brinkervii.jewel.core.exception.NoJewelChainException;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 
 import java.io.File;
@@ -16,14 +18,19 @@ import java.util.List;
 
 @Data
 public class JewelContext {
-	private ArrayList<Stylesheet> stylesheets = new ArrayList<>();
-	private ArrayList<HTMLDocument> htmlDocuments = new ArrayList<>();
-	private ArrayList<MarkdownDocument> markdownDocuments = new ArrayList<>();
+	private ArrayList<Stylesheet> stylesheets;
+	private ArrayList<HTMLDocument> htmlDocuments;
+	private ArrayList<MarkdownDocument> markdownDocuments;
 	private File outputDirectory = null;
-	private JewelWorkerChain activeChain;
+	private JewelWorkerChain currentChain;
 	private ObjectMapper objectMapper = new ObjectMapper();
 	private JewelConfiguration config = null;
 	private HTMLDocument siteLayout;
+	private JewelChainConstructor chainConstructor = null;
+
+	public JewelContext() {
+		this.reset();
+	}
 
 	public void stylesheet(Stylesheet stylesheet) {
 		stylesheets.add(stylesheet);
@@ -104,5 +111,22 @@ public class JewelContext {
 		htmlDocuments.removeAll(rubbish);
 
 		htmlDocument(newDocument);
+	}
+
+	private void reset() {
+		stylesheets = new ArrayList<>();
+		htmlDocuments = new ArrayList<>();
+		markdownDocuments = new ArrayList<>();
+		siteLayout = null;
+	}
+
+	public void regenerate() throws NoJewelChainException, NoChainConstructorException {
+		if (this.chainConstructor == null) throw new NoChainConstructorException();
+
+		this.currentChain = this.chainConstructor.construct();
+		if (this.currentChain == null) throw new NoJewelChainException();
+
+		this.reset();
+		this.currentChain.work();
 	}
 }

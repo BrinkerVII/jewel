@@ -2,10 +2,10 @@ package net.brinkervii.jewel;
 
 import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.JewelContext;
+import net.brinkervii.jewel.core.exception.NoChainConstructorException;
+import net.brinkervii.jewel.core.exception.NoJewelChainException;
 import net.brinkervii.jewel.core.work.driver.DefaultJewelWorkerChain;
-import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 import net.brinkervii.jewel.server.JewelServer;
-import net.brinkervii.quetzalcoatl.core.Lucoa;
 
 import java.io.IOException;
 
@@ -37,7 +37,13 @@ public class Jewel implements Runnable {
 	public void run() {
 		log.info("Starting Jewel...");
 
-		JewelWorkerChain workerChain = new DefaultJewelWorkerChain(context);
-		workerChain.work();
+		context.setChainConstructor(() -> new DefaultJewelWorkerChain(context));
+
+		try {
+			context.regenerate();
+		} catch (NoJewelChainException | NoChainConstructorException e) {
+			log.error("Press F to pay respect");
+			e.printStackTrace();
+		}
 	}
 }

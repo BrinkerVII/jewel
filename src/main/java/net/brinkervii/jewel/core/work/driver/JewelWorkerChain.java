@@ -16,7 +16,7 @@ public abstract class JewelWorkerChain {
 	}
 
 	public void work() {
-		context.setActiveChain(this);
+		context.setCurrentChain(this);
 	}
 
 	public JewelContext getContext() {
