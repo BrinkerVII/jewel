@@ -21,8 +21,6 @@ import java.util.List;
 
 @Slf4j
 public final class HTMLWriterWorker extends JewelWorker {
-	private List<HTMLDocument> components = new LinkedList<>();
-
 	public HTMLWriterWorker(JewelWorkerChain chain) {
 		super(chain);
 	}
@@ -31,33 +29,9 @@ public final class HTMLWriterWorker extends JewelWorker {
 	public void run() {
 		log.info("Running HTML Writer");
 
-		this.components = chain.getContext().getComponents();
-
 		for (HTMLDocument htmlDocument : chain.getContext().getHtmlDocuments()) {
 			if (htmlDocument.shouldWrite()) {
 				log.info(String.format("Writing HTML file %s", htmlDocument.getName()));
-
-				final Document soup = htmlDocument.getSoup();
-				boolean changedSoup = false;
-
-				// Merge components with main document
-				for (Element element : soup.getAllElements()) {
-					HTMLDocument component = findComponent(element.nodeName());
-					if (component == null) continue;
-
-					Element parent = element.parent();
-					element.remove();
-
-					for (Element componentChild : component.getSoup().body().children()) {
-						parent.appendChild(componentChild);
-					}
-					changedSoup = true;
-				}
-
-				// Only update the content string if the DOM has changed
-				if (changedSoup) {
-					htmlDocument.soupToContentString();
-				}
 
 				final Path originPath = Paths.get(htmlDocument.getOrigin().getAbsolutePath());
 				final Path sourceFilePath = Paths.get(htmlDocument.getSourceFile().getAbsolutePath());
@@ -83,19 +57,5 @@ public final class HTMLWriterWorker extends JewelWorker {
 				}
 			}
 		}
-	}
-
-	private HTMLDocument findComponent(String name) {
-		for (HTMLDocument component : components) {
-			try {
-				if (component.getSelector().equals(name)) {
-					return component;
-				}
-			} catch (NotAComponentException e) {
-				log.warn("Could not get selector: " + e.toString());
-			}
-		}
-
-		return null;
 	}
 }
