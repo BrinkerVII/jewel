@@ -35,7 +35,11 @@ public class DocumentWithFrontMatter extends JewelDocument {
 	}
 
 	public String getName() {
-		return "DOCUMENT_WITH_FRONTMATTER";
+		if (sourceFile == null) {
+			return "NO_SOURCE_FILE";
+		}
+
+		return sourceFile.getName();
 	}
 
 	public DocumentWithFrontMatter getPrevious() {

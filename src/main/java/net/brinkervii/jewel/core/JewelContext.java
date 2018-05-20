@@ -23,6 +23,7 @@ public class JewelContext {
 	private JewelWorkerChain activeChain;
 	private ObjectMapper objectMapper = new ObjectMapper();
 	private JewelConfiguration config = null;
+	private HTMLDocument siteLayout;
 
 	public void stylesheet(Stylesheet stylesheet) {
 		stylesheets.add(stylesheet);
