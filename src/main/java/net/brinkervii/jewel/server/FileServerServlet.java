@@ -55,6 +55,7 @@ public class FileServerServlet extends Servlet {
 		if (file.isDirectory()) {
 			File indexFile = new File(file, "index.html");
 			if (indexFile.exists()) {
+				log.info(String.format("Rewrite %s -> %s", file, indexFile));
 				file = indexFile;
 				indexFile = null;
 			}
