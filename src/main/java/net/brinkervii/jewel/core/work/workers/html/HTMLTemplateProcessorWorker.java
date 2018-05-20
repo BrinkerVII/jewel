@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HTMLTemplateProcessorWorker extends JewelWorker {
+public final class HTMLTemplateProcessorWorker extends JewelWorker {
 	public HTMLTemplateProcessorWorker(JewelWorkerChain chain) {
 		super(chain);
 	}

@@ -10,7 +10,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-public class MarkdownRendererWorker extends JewelWorker {
+public final class MarkdownRendererWorker extends JewelWorker {
 	public MarkdownRendererWorker(JewelWorkerChain chain) {
 		super(chain);
 	}
