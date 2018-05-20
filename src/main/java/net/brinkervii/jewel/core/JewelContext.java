@@ -94,4 +94,14 @@ public class JewelContext {
 
 		return this.outputDirectory;
 	}
+
+	public void replaceHTMLDocument(HTMLDocument original, HTMLDocument newDocument) {
+		List<HTMLDocument> rubbish = new LinkedList<>();
+		htmlDocuments.forEach(d -> {
+			if (d.equals(original)) rubbish.add(d);
+		});
+		htmlDocuments.removeAll(rubbish);
+
+		htmlDocument(newDocument);
+	}
 }

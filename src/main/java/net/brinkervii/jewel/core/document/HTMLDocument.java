@@ -40,7 +40,7 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 	}
 
 	public boolean shouldWrite() {
-		return !isLayout() && !isComponent();
+		return (!isLayout() && !isComponent()) || alwaysWrite;
 	}
 
 	public String getSelector() throws NotAComponentException {
