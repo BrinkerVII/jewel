@@ -14,13 +14,30 @@ import java.io.IOException;
 @Slf4j
 public class FileServerServlet extends Servlet {
 	private final static File cwd = new File("./").getAbsoluteFile();
+	private final JewelContext context;
+	private File root;
 
 	public FileServerServlet(JewelContext context) {
+		this(context, cwd);
+	}
+
+	public FileServerServlet(JewelContext context, String rootPath) {
+		this(context, new File(rootPath));
+	}
+
+	public FileServerServlet(JewelContext context, File rootPath) {
 		super();
+		this.context = context;
+
+		if (!rootPath.exists()) {
+			log.warn(String.format("Root path %s does not exist", rootPath.getAbsolutePath()));
+		}
+
+		this.root = rootPath;
 	}
 
 	protected File getFile(Request request) {
-		return new File(cwd, request.uri().toString());
+		return new File(root, request.uri().toString());
 	}
 
 	@Override

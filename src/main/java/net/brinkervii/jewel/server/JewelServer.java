@@ -17,7 +17,7 @@ public class JewelServer {
 
 	public void init() throws IOException {
 		this.lucoa = new Lucoa(4000);
-		lucoa.addServlet(new FileServerServlet(context));
+		lucoa.addServlet(new FileServerServlet(context, "www"));
 		lucoa.addServlet(new RegenerateServlet(context));
 	}
 }
