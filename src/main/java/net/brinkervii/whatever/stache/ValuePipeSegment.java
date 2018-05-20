@@ -5,7 +5,6 @@ import net.brinkervii.whatever.stache.piping.StachePipelineState;
 import org.jsoup.nodes.Element;
 
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class ValuePipeSegment extends StachePipelineStage {
 	public ValuePipeSegment(StachePipelineState state, String bit) {
