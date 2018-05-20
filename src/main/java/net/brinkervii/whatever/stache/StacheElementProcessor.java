@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 @Slf4j
 public class StacheElementProcessor extends TemplateElementProcessor {
-	private static final Pattern STACHE_PATTERN_INNER = Pattern.compile("\\{\\{\\s*(.*?)\\s*}}");
+	private static final Pattern STACHE_PATTERN_INNER = Pattern.compile("^.*?\\{\\{\\s*(.*?)\\s*}}");
 
 	public StacheElementProcessor(TemplateProcessor parent) {
 		super(parent);

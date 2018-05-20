@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.work.workers.html;
 
+import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
@@ -9,6 +10,7 @@ import org.jsoup.nodes.Document;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public final class HTMLTemplateProcessorWorker extends JewelWorker {
 	public HTMLTemplateProcessorWorker(JewelWorkerChain chain) {
 		super(chain);
@@ -16,12 +18,16 @@ public final class HTMLTemplateProcessorWorker extends JewelWorker {
 
 	@Override
 	public void run() {
+		log.info("Running template processor");
+
 		Map<HTMLDocument, HTMLDocument> replace = new HashMap<>();
 
 		for (HTMLDocument document : chain.getContext().getHtmlDocuments()) {
+			log.info(String.format("Processing templating in %s", document.getName()));
+
 			TemplateProcessor templateProcessor = new TemplateProcessor();
-			if (document.getFrontMatter().containsKey("title")) {
-				int bp = 999;
+			if (document.getName().equals("index.html")) {
+				int bp = 123;
 			}
 
 			HashMap<String, Object> provider = new HashMap<>();
