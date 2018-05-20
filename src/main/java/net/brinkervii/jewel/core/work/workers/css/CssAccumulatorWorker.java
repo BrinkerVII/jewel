@@ -39,7 +39,9 @@ public final class CssAccumulatorWorker extends JewelWorker {
 						inputStream = new FileInputStream(file);
 						final String s = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
-						chain.getContext().stylesheet(Stylesheet.withContent(root, s));
+						final Stylesheet stylesheet = Stylesheet.withContent(root, s);
+						stylesheet.setSourceFile(file);
+						chain.getContext().stylesheet(stylesheet);
 						log.info(String.format("Added CSS file %s", file.getName()));
 					} catch (IOException e) {
 						e.printStackTrace();

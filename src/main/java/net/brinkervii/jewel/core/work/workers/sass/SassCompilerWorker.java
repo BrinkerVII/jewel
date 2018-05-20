@@ -13,6 +13,7 @@ import net.brinkervii.jewel.core.document.Stylesheet;
 import net.brinkervii.jewel.core.exception.NotADirectoryException;
 import net.brinkervii.jewel.core.work.driver.DefaultJewelWorkerChain;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
+import net.brinkervii.jewel.util.FileUtil;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -78,6 +79,8 @@ public final class SassCompilerWorker extends JewelWorker {
 
 						final Stylesheet stylesheet = Stylesheet.withContent(root, output.getCss());
 						stylesheet.setSourceMap(output.getSourceMap());
+						stylesheet.setSourceFile(FileUtil.changeExtension(file, "css"));
+
 						chain.getContext().stylesheet(stylesheet);
 						log.info(String.format("Added compiled SASS file %s", file.getName()));
 					} catch (IOException | CompilationException | URISyntaxException e) {
