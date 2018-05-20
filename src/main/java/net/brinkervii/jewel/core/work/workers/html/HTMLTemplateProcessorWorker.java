@@ -1,6 +1,5 @@
 package net.brinkervii.jewel.core.work.workers.html;
 
-import net.brinkervii.jewel.core.document.DocumentWithFrontMatter;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
@@ -20,21 +19,7 @@ public class HTMLTemplateProcessorWorker extends JewelWorker {
 			TemplateProcessor templateProcessor = new TemplateProcessor();
 
 			HashMap<String, Object> provider = new HashMap<>();
-			DocumentWithFrontMatter fmdocument = document;
-
-			if(document.getSoup().toString().contains("my first")) {
-				int bp = 0;
-			}
-
-			HashMap<String, Object> pageProperties = new HashMap<>();
-			while (fmdocument != null) {
-				fmdocument.getFrontMatter().forEach((k, v) -> {
-					pageProperties.put(String.valueOf(k), v);
-				});
-				fmdocument = fmdocument.getPrevious();
-			}
-
-			provider.put("page", pageProperties);
+			provider.put("page", document.getFrontMatter());
 			templateProcessor.provide(provider);
 
 			final Document finalDocument = templateProcessor.process(document.getSoup());

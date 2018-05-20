@@ -6,6 +6,12 @@ public class FrontMatter extends Properties {
 	public FrontMatter() {
 	}
 
+	public FrontMatter(FrontMatter... sources) {
+		for (FrontMatter source : sources) {
+			source.forEach(this::put);
+		}
+	}
+
 	public void load(String frontMatterString) {
 		String withoutCarriageReturns = frontMatterString.replaceAll("\r", "");
 		for (String line : withoutCarriageReturns.split("\n")) {

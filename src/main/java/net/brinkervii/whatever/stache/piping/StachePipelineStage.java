@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class StachePipelineStage extends PipelineStage<Element> {
 	private static HashMap<String, StachePipelineStage> cache = new HashMap<>();
-	protected final StachePipelineState state;
+	protected StachePipelineState state;
 	protected final String bit;
 
 	protected StachePipelineStage(StachePipelineState state, String bit) {
@@ -17,8 +17,17 @@ public class StachePipelineStage extends PipelineStage<Element> {
 		this.bit = bit;
 	}
 
+	protected void setState(StachePipelineState state) {
+		this.state = state;
+		super.state = state;
+	}
+
 	public static PipelineStage<Element> fromBit(StachePipelineState state, String bit) {
-		if(cache.containsKey(bit)) return cache.get(bit);
+		if(cache.containsKey(bit)) {
+			final StachePipelineStage stachePipelineStage = cache.get(bit);
+			stachePipelineStage.setState(state);
+			return stachePipelineStage;
+		}
 
 		cache.put(bit, new ValuePipeSegment(state, bit));
 		return fromBit(state, bit);

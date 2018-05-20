@@ -13,19 +13,18 @@ public class ValuePipeSegment extends StachePipelineStage {
 
 	@Override
 	public Element pump(Element work) {
-		Map<String, Object> source = null;
+		Map source = null;
 		Object result = null;
 		for (String accesor : bit.split("\\.")) {
 			Object v;
 			if (source == null) {
 				v = state.getTemplateProcessor().getValue(accesor, null);
-
 			} else {
-				v = source.get(bit);
+				v = source.get(accesor);
 			}
 
 			if (v instanceof Map) {
-				source = (Map<String, Object>) v;
+				source = (Map) v;
 			} else {
 				result = v;
 			}

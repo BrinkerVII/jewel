@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.document;
 
 import net.brinkervii.jewel.core.exception.NotAComponentException;
+import net.brinkervii.jewel.core.frontmatter.FrontMatter;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -79,6 +80,8 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 		document.sourceFile = sourceFile;
 		document.previous = previous;
 		document.setContentString(s);
+
+		document.frontMatter=  new FrontMatter(previous.frontMatter, document.frontMatter);
 
 		return document;
 	}
