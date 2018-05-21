@@ -40,7 +40,7 @@ public class FrontMatterParser {
 					fmEnd = idx - 2;
 					break;
 				}
-			}
+			} else { dashCounter = 0; }
 
 			idx++;
 		}
