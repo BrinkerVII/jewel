@@ -26,9 +26,6 @@ public final class HTMLTemplateProcessorWorker extends JewelWorker {
 			log.info(String.format("Processing templating in %s", document.getName()));
 
 			TemplateProcessor templateProcessor = new TemplateProcessor();
-			if (document.getName().equals("index.html")) {
-				int bp = 123;
-			}
 
 			HashMap<String, Object> provider = new HashMap<>();
 			provider.put("page", document.getFrontMatter());

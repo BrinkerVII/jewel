@@ -26,10 +26,6 @@ public final class HTMLComponentInjectorWorker extends JewelWorker {
 		log.info(String.format("We have %d components in stock", components.size()));
 
 		for (HTMLDocument document : chain.getContext().getHtmlDocuments()) {
-			if(document.getName().equals("index.html")) {
-				int asd = 0;
-			}
-
 			final Document soup = document.getSoup();
 			boolean changedSoup = false;
 
