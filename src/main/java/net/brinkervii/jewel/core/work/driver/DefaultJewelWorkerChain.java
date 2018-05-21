@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.driver;
 
 import net.brinkervii.jewel.core.JewelContext;
+import net.brinkervii.jewel.core.work.CopyAssetsWorker;
 import net.brinkervii.jewel.core.work.workers.OutputDirectoryStructureWorker;
 import net.brinkervii.jewel.core.work.workers.css.CssAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.css.CssWriterWorker;
@@ -28,6 +29,7 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 		add(new HTMLTemplateProcessorWorker(this));
 		add(new HTMLWriterWorker(this));
 		add(new CssWriterWorker(this));
+		add(new CopyAssetsWorker(this));
 	}
 
 	@Override
