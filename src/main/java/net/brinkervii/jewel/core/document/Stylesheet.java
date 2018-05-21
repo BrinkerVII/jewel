@@ -64,4 +64,18 @@ public class Stylesheet extends JewelDocument {
 	public void setSourceMap(String sourceMap) {
 		this.sourceMap = sourceMap;
 	}
+
+	public Stylesheet clone() {
+		Stylesheet clone = new Stylesheet();
+		clone.file = file;
+		clone.content = content;
+		clone.sourceMap = sourceMap;
+
+		clone.origin = origin;
+		clone.sourceFile = sourceFile;
+		clone.alwaysWrite = alwaysWrite;
+
+
+		return clone;
+	}
 }

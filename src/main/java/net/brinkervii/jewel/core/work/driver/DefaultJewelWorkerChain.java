@@ -10,6 +10,7 @@ import net.brinkervii.jewel.core.work.workers.md.MarkdownRendererWorker;
 import net.brinkervii.jewel.core.work.workers.sass.SassCompilerWorker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 	private ArrayList<JewelWorker> workers = new ArrayList<>();
@@ -39,8 +40,15 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 	@Override
 	public void work() {
 		super.work();
+
+		HashMap<String, JewelContext> snapshots = new HashMap<>();
 		for (JewelWorker worker : workers) {
+//			snapshots.add(context.clone());
+			snapshots.put("BEFORE " + worker.getClass().getSimpleName(), context.clone());
 			worker.run();
+			snapshots.put("AFTER " + worker.getClass().getSimpleName(), context.clone());
 		}
+
+		int bp = 0;
 	}
 }

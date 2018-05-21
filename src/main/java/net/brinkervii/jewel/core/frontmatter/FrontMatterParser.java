@@ -14,6 +14,11 @@ public class FrontMatterParser {
 
 	public void parse() throws RuntimeException {
 		if (content == null) return;
+		if (!content.startsWith("---")) {
+			// Document does not qualify
+			this.documentContentString = content;
+			return;
+		}
 
 		int dashCounter = 0;
 		int idx = 0;

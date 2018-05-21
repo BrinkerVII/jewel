@@ -89,4 +89,15 @@ public class HTMLDocument extends DocumentWithFrontMatter {
 	public void soupToContentString() {
 		this.contentString = soup.outerHtml();
 	}
+
+	@Override
+	public HTMLDocument clone() {
+		HTMLDocument clone = new HTMLDocument();
+
+		clone.origin = origin;
+		clone.sourceFile = sourceFile;
+		clone.contentString = contentString;
+
+		return clone;
+	}
 }

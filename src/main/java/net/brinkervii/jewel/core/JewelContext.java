@@ -129,4 +129,18 @@ public class JewelContext {
 		this.reset();
 		this.currentChain.work();
 	}
+
+	@Override
+	public JewelContext clone() {
+		JewelContext clone = new JewelContext();
+
+		for (Stylesheet stylesheet : stylesheets) {
+			clone.stylesheets.add(stylesheet.clone());
+		}
+		for(HTMLDocument document : htmlDocuments) {
+			clone.htmlDocuments.add(document.clone());
+		}
+
+		return clone;
+	}
 }
