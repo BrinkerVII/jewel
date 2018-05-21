@@ -1,6 +1,7 @@
 package net.brinkervii.jewel;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.jewel.core.JewelChangeWatcher;
 import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.jewel.core.exception.NoChainConstructorException;
 import net.brinkervii.jewel.core.exception.NoJewelChainException;
@@ -24,6 +25,13 @@ public class Jewel implements Runnable {
 		JewelServer server = new JewelServer(context);
 		try {
 			server.init();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		final JewelChangeWatcher jewelChangeWatcher = new JewelChangeWatcher(context);
+		try {
+			jewelChangeWatcher.init();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
