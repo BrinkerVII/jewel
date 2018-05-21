@@ -7,6 +7,7 @@ import net.brinkervii.jewel.core.exception.NoJewelChainException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
@@ -22,17 +23,27 @@ public class JewelChangeWatcher implements Runnable {
 	}
 
 	public void init() throws IOException {
-		File src = new File(context.config().getSourceLocation());
-		File theme = new File(context.config().getThemeLocation());
+		final File src = new File(context.config().getSourceLocation());
+		final File theme = new File(context.config().getThemeLocation());
 
 		this.watcher = FileSystems.getDefault().newWatchService();
-		Paths.get(src.getAbsolutePath()).register(watcher, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
-		Paths.get(theme.getAbsolutePath()).register(watcher, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
+		registerRecursive(watcher, Paths.get(src.getAbsolutePath()));
+		registerRecursive(watcher, Paths.get(theme.getAbsolutePath()));
 
 		this.thread = new Thread(this);
 		thread.start();
 
 		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
+	}
+
+	private void registerRecursive(final WatchService watchService, final Path root) throws IOException {
+		Files.walkFileTree(root, new SimpleFileVisitor<Path>() {
+			@Override
+			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+				dir.register(watchService, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
+				return FileVisitResult.CONTINUE;
+			}
+		});
 	}
 
 	private void shutdown() {
