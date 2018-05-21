@@ -1,7 +1,7 @@
 package net.brinkervii.jewel.core.work.driver;
 
 import net.brinkervii.jewel.core.JewelContext;
-import net.brinkervii.jewel.core.work.CopyAssetsWorker;
+import net.brinkervii.jewel.core.work.workers.CopyAssetsWorker;
 import net.brinkervii.jewel.core.work.workers.OutputDirectoryStructureWorker;
 import net.brinkervii.jewel.core.work.workers.css.CssAccumulatorWorker;
 import net.brinkervii.jewel.core.work.workers.css.CssWriterWorker;

@@ -1,4 +1,4 @@
-package net.brinkervii.jewel.core.work;
+package net.brinkervii.jewel.core.work.workers;
 
 import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
