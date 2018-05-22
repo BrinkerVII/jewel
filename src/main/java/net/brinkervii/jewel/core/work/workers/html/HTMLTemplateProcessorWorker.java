@@ -29,6 +29,7 @@ public final class HTMLTemplateProcessorWorker extends JewelWorker {
 
 			HashMap<String, Object> provider = new HashMap<>();
 			provider.put("page", document.getFrontMatter());
+			provider.put("site", chain.getContext().config().getSiteProperties().map());
 			templateProcessor.provide(provider);
 
 			final Document finalDocument = templateProcessor.process(document.getSoup());
