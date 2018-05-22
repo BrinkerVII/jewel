@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.document;
 
+import net.brinkervii.jewel.util.FileUtil;
 import org.apache.commons.io.IOUtils;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -41,7 +42,8 @@ public class MarkdownDocument extends DocumentWithFrontMatter {
 
 		try (FileInputStream inputStream = new FileInputStream(file)) {
 			document.setContentString(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
-			document.sourceFile = file;
+			document.sourceFile = FileUtil.changeExtension(file, "html");
+			document.alwaysWrite = true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

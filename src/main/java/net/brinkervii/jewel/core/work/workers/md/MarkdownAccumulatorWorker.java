@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.work.workers.md;
 
+import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.MarkdownDocument;
@@ -10,6 +11,7 @@ import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+@Slf4j
 public final class MarkdownAccumulatorWorker extends JewelWorker {
 	public MarkdownAccumulatorWorker(JewelWorkerChain chain) {
 		super(chain);
@@ -17,6 +19,8 @@ public final class MarkdownAccumulatorWorker extends JewelWorker {
 
 	@Override
 	public void run() {
+		log.info("Running markdown accumulator");
+
 		final JewelConfiguration config = chain.getContext().config();
 		FileAccumulator accumulator = new FileAccumulator(config.getThemeLocation(), config.getSourceLocation());
 		try {
@@ -33,6 +37,7 @@ public final class MarkdownAccumulatorWorker extends JewelWorker {
 	}
 
 	private void handleFile(File origin, File file) {
+		log.info("Handling file " + file.getName());
 		final MarkdownDocument document = MarkdownDocument.fromFile(origin, file);
 		chain.getContext().markdown(document);
 	}
