@@ -26,6 +26,7 @@ public final class DefaultJewelWorkerChain extends JewelWorkerChain {
 		add(new MarkdownRendererWorker(this));
 		add(new SiteLayoutSelectorWorker(this));
 		add(new HTMLComponentInjectorWorker(this));
+		add(new SiteLayoutWrapper(this));
 		add(new HTMLTemplateProcessorWorker(this));
 		add(new HTMLWriterWorker(this));
 		add(new CssWriterWorker(this));
