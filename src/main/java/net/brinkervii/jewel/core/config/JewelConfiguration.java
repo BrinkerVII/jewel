@@ -13,6 +13,9 @@ public class JewelConfiguration {
 	private String siteLocation = "www";
 	@JsonProperty("source_location")
 	private String sourceLocation = "src";
+	@JsonProperty("site_properties")
+	private SiteProperties siteProperties = new SiteProperties();
 
-	public JewelConfiguration() {}
+	public JewelConfiguration() {
+	}
 }
