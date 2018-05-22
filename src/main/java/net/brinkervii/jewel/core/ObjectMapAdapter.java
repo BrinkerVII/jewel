@@ -3,11 +3,11 @@ package net.brinkervii.jewel.core;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ObjectMap implements Map<String, Object> {
+public class ObjectMapAdapter implements Map<String, Object> {
 	private final Object innerObject;
 	private final Class<?> innerClass;
 
-	public ObjectMap(Object innerObject) {
+	public ObjectMapAdapter(Object innerObject) {
 		this.innerObject = innerObject;
 		this.innerClass = innerObject.getClass();
 	}
