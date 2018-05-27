@@ -16,7 +16,7 @@ public class ValuePipeSegment extends StachePipelineStage {
 
 	@Override
 	public Element pump(Element work) {
-		Object value = state.getTemplateContext().access(bit);
+		Object value = state.getTemplateScope().access(bit);
 
 		if (value != null) {
 			// String regex = String.format("\\{\\{\\s*%s\\s*}}", bit);

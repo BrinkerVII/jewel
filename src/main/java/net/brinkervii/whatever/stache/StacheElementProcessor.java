@@ -2,7 +2,7 @@ package net.brinkervii.whatever.stache;
 
 import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.jewel.core.pipeline.Pipeline;
-import net.brinkervii.whatever.core.TemplateContext;
+import net.brinkervii.whatever.core.TemplateScope;
 import net.brinkervii.whatever.core.TemplateElementProcessor;
 import net.brinkervii.whatever.core.TemplateProcessor;
 import net.brinkervii.whatever.stache.piping.StachePipeline;
@@ -17,11 +17,11 @@ import java.util.regex.Pattern;
 @Slf4j
 public class StacheElementProcessor extends TemplateElementProcessor {
 	private static final Pattern STACHE_PATTERN_INNER = Pattern.compile("\\{\\{\\s*(.*?)\\s*}}");
-	private final TemplateContext templateContext;
+	private final TemplateScope templateScope;
 
-	public StacheElementProcessor(TemplateProcessor parent, TemplateContext templateContext) {
+	public StacheElementProcessor(TemplateProcessor parent, TemplateScope templateScope) {
 		super(parent);
-		this.templateContext = templateContext;
+		this.templateScope = templateScope;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class StacheElementProcessor extends TemplateElementProcessor {
 		}
 		complete.run();
 
-		pipeline = new StachePipeline(bits, new StachePipelineState(parent, templateContext));
+		pipeline = new StachePipeline(bits, new StachePipelineState(parent, templateScope));
 
 		return pipeline;
 	}

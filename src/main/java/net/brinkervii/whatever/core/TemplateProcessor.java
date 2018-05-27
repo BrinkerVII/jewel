@@ -17,10 +17,10 @@ import java.util.regex.Pattern;
 public class TemplateProcessor {
 	private static final Pattern STACHE_PATTERN_OUTER = Pattern.compile("(\\{\\{\\s*.*?\\s*}})");
 	private MultiMap<String, Object> providers = new MultiMap<>();
-	private TemplateContext rootContext = null;
+	private TemplateScope rootContext = null;
 
 	public TemplateProcessor() {
-		rootContext = new TemplateContext(providers);
+		rootContext = new TemplateScope(providers);
 	}
 
 	public void provide(Map<String, Object> provider) {

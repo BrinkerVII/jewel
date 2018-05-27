@@ -4,8 +4,8 @@ import net.brinkervii.common.MultiMap;
 
 import java.util.Map;
 
-public class TemplateContext extends MultiMap {
-	public TemplateContext(Map providers) {
+public class TemplateScope extends MultiMap {
+	public TemplateScope(Map providers) {
 		super(providers);
 	}
 
