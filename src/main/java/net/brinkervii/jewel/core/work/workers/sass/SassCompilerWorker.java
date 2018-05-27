@@ -45,7 +45,7 @@ public final class SassCompilerWorker extends JewelWorker {
 		Collection<Importer> importers = Collections.singleton((url, previous) -> {
 			final URI importUri = previous.getImportUri();
 
-			if (url.equals("~/sass_variables")) {
+			if ("~/sass_variables".equals(url)) {
 				try {
 					return importSassVariablesFromConfig(new URI(url));
 				} catch (URISyntaxException e) {
