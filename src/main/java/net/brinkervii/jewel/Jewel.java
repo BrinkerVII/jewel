@@ -1,6 +1,7 @@
 package net.brinkervii.jewel;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.JewelChangeWatcher;
 import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.jewel.core.exception.NoChainConstructorException;
@@ -26,14 +27,14 @@ public class Jewel implements Runnable {
 		try {
 			server.init();
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 
 		final JewelChangeWatcher jewelChangeWatcher = new JewelChangeWatcher(context);
 		try {
 			jewelChangeWatcher.init();
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 
@@ -51,7 +52,7 @@ public class Jewel implements Runnable {
 			context.regenerate();
 		} catch (NoJewelChainException | NoChainConstructorException e) {
 			log.error("Press F to pay respect");
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 }

@@ -2,6 +2,7 @@ package net.brinkervii.jewel.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.document.MarkdownDocument;
@@ -81,13 +82,13 @@ public class JewelContext {
 				try {
 					this.config = objectMapper.readValue(configurationFile, JewelConfiguration.class);
 				} catch (IOException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 				}
 			} else {
 				try {
 					objectMapper.writeValue(configurationFile, this.config);
 				} catch (IOException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.workers;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 import org.apache.commons.io.FileUtils;
@@ -28,7 +29,7 @@ public final class CopyAssetsWorker extends JewelWorker {
 			try {
 				FileUtils.copyDirectory(sourceAssetsDirectory, outputAssetsDirectory);
 			} catch (IOException e) {
-				e.printStackTrace();
+				BucketOfShame.accept(e);
 			}
 		}
 	}

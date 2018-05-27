@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.html;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
@@ -8,7 +9,6 @@ import net.brinkervii.jewel.util.FileUtil;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -42,10 +42,8 @@ public final class HTMLWriterWorker extends JewelWorker {
 
 				try (FileOutputStream outputStream = new FileOutputStream(outfile)) {
 					IOUtils.write(htmlDocument.getContentString(), outputStream, StandardCharsets.UTF_8);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
 				} catch (IOException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 				}
 			}
 		}

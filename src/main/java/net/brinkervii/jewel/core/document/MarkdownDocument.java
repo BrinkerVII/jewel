@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.document;
 
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.util.FileUtil;
 import org.apache.commons.io.IOUtils;
 import org.commonmark.node.Node;
@@ -10,7 +11,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -44,10 +44,8 @@ public class MarkdownDocument extends DocumentWithFrontMatter {
 			document.setContentString(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
 			document.sourceFile = FileUtil.changeExtension(file, "html");
 			document.alwaysWrite = true;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 
 		return document;

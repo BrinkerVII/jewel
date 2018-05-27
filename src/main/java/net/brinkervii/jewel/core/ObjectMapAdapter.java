@@ -1,5 +1,7 @@
 package net.brinkervii.jewel.core;
 
+import net.brinkervii.BucketOfShame;
+
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -56,7 +58,7 @@ public class ObjectMapAdapter implements Map<String, Object> {
 			field.setAccessible(true);
 			return field.get(innerObject);
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 
 		return null;
@@ -69,7 +71,7 @@ public class ObjectMapAdapter implements Map<String, Object> {
 			field.setAccessible(true);
 			field.set(innerObject, o);
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 
 		return o;

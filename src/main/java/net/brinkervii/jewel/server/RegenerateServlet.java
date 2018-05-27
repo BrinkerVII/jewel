@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.server;
 
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.jewel.core.exception.NoChainConstructorException;
 import net.brinkervii.jewel.core.exception.NoJewelChainException;
@@ -30,7 +31,7 @@ public class RegenerateServlet extends Servlet {
 			response.status(200).writer(responseBody -> responseBody.string("OK"));
 		} catch (NoJewelChainException | NoChainConstructorException e) {
 			response.status(500).writer(responseBody -> responseBody.string("Regeneration failed, please refer to the logs"));
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 
 		return response;

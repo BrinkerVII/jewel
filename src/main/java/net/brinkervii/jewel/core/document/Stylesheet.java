@@ -1,5 +1,6 @@
 package net.brinkervii.jewel.core.document;
 
+import net.brinkervii.BucketOfShame;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -32,14 +33,14 @@ public class Stylesheet extends JewelDocument {
 					inputStream = new FileInputStream(file);
 					content = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 				} catch (IOException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 					content = "";
 				} finally {
 					if (inputStream != null) {
 						try {
 							inputStream.close();
 						} catch (IOException e) {
-							e.printStackTrace();
+							BucketOfShame.accept(e);
 						}
 					}
 				}

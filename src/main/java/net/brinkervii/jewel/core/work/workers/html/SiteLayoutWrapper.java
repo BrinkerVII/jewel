@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.html;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.exception.NoTargetElementException;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
@@ -39,7 +40,7 @@ public final class SiteLayoutWrapper extends JewelWorker {
 					}
 					changes.put(document, newDocument);
 				} catch (NoTargetElementException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 				}
 			}
 		}

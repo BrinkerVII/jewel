@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.exception.NoChainConstructorException;
 import net.brinkervii.jewel.core.exception.NoJewelChainException;
 
@@ -53,7 +54,7 @@ public class JewelChangeWatcher implements Runnable {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 		if (thread.isAlive()) {
 			thread.interrupt();
@@ -69,7 +70,7 @@ public class JewelChangeWatcher implements Runnable {
 			try {
 				key = watcher.take();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				BucketOfShame.accept(e);
 				continue;
 			}
 
@@ -85,7 +86,7 @@ public class JewelChangeWatcher implements Runnable {
 				try {
 					context.regenerate();
 				} catch (NoJewelChainException | NoChainConstructorException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 				}
 			}
 

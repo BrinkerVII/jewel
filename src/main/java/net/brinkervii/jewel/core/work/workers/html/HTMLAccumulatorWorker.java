@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.html;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
@@ -33,7 +34,7 @@ public final class HTMLAccumulatorWorker extends JewelWorker {
 					try {
 						chain.getContext().htmlDocument(HTMLDocument.fromFile(origin, file));
 					} catch (IOException e) {
-						e.printStackTrace();
+						BucketOfShame.accept(e);
 					}
 
 					log.info(String.format("Added HTML file %s", file.getName()));
@@ -41,7 +42,7 @@ public final class HTMLAccumulatorWorker extends JewelWorker {
 				}
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 }

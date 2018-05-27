@@ -1,6 +1,7 @@
 package net.brinkervii.whatever.stache;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.whatever.stache.piping.StachePipelineStage;
 import net.brinkervii.whatever.stache.piping.StachePipelineState;
 import org.jsoup.nodes.Element;
@@ -41,7 +42,7 @@ public class ValuePipeSegment extends StachePipelineStage {
 				work.text(work.ownText().replaceAll(regex, result.toString()));
 			} catch (PatternSyntaxException e) {
 				log.error("Failed to run regex " + regex);
-				e.printStackTrace();
+				BucketOfShame.accept(e);
 			}
 		}
 

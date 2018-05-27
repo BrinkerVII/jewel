@@ -7,6 +7,7 @@ import io.bit3.jsass.Output;
 import io.bit3.jsass.importer.Import;
 import io.bit3.jsass.importer.Importer;
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.Stylesheet;
@@ -49,7 +50,7 @@ public final class SassCompilerWorker extends JewelWorker {
 				try {
 					return importSassVariablesFromConfig(new URI(url));
 				} catch (URISyntaxException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 					return null;
 				}
 			}
@@ -66,7 +67,7 @@ public final class SassCompilerWorker extends JewelWorker {
 			try {
 				return Collections.singleton(new Import(file.toURI(), file.getAbsoluteFile().toURI(), IOUtils.toString(new FileInputStream(file), StandardCharsets.UTF_8)));
 			} catch (IOException e) {
-				e.printStackTrace();
+				BucketOfShame.accept(e);
 			}
 
 			return null;
@@ -94,13 +95,13 @@ public final class SassCompilerWorker extends JewelWorker {
 						chain.getContext().stylesheet(stylesheet);
 						log.info(String.format("Added compiled SASS file %s", file.getName()));
 					} catch (IOException | CompilationException | URISyntaxException e) {
-						e.printStackTrace();
+						BucketOfShame.accept(e);
 					}
 
 				}
 			});
 		} catch (FileNotFoundException | NotADirectoryException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.md;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.MarkdownDocument;
@@ -32,7 +33,7 @@ public final class MarkdownAccumulatorWorker extends JewelWorker {
 				}
 			});
 		} catch (FileNotFoundException | NotADirectoryException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 

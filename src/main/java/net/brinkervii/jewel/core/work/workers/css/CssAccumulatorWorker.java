@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.css;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.FileAccumulator;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.Stylesheet;
@@ -44,22 +45,20 @@ public final class CssAccumulatorWorker extends JewelWorker {
 						chain.getContext().stylesheet(stylesheet);
 						log.info(String.format("Added CSS file %s", file.getName()));
 					} catch (IOException e) {
-						e.printStackTrace();
+						BucketOfShame.accept(e);
 					} finally {
 						if (inputStream != null) {
 							try {
 								inputStream.close();
 							} catch (IOException e) {
-								e.printStackTrace();
+								BucketOfShame.accept(e);
 							}
 						}
 					}
 				}
 			});
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (NotADirectoryException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException | NotADirectoryException e) {
+			BucketOfShame.accept(e);
 		}
 	}
 }

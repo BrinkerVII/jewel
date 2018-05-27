@@ -2,6 +2,7 @@ package net.brinkervii.quetzalcoatl.core;
 
 import com.sun.net.httpserver.HttpServer;
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.quetzalcoatl.api.Servlet;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Lucoa {
 		try {
 			init();
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 

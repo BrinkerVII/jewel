@@ -1,6 +1,7 @@
 package net.brinkervii.jewel.server;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.BucketOfShame;
 import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.quetzalcoatl.api.Request;
 import net.brinkervii.quetzalcoatl.api.Response;
@@ -68,12 +69,12 @@ public class FileServerServlet extends Servlet {
 				try {
 					responseBody.bytes(bytes);
 				} catch (IOException e) {
-					e.printStackTrace();
+					BucketOfShame.accept(e);
 					response.status(500).writer(responseBody1 -> responseBody1.string("IO Error"));
 				}
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 			response.status(500).writer(responseBody -> responseBody.string("General failure"));
 		}
 

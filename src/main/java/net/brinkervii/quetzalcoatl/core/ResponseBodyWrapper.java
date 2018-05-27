@@ -2,6 +2,7 @@ package net.brinkervii.quetzalcoatl.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.brinkervii.BucketOfShame;
 
 import java.io.IOException;
 import java.io.InvalidClassException;
@@ -27,7 +28,7 @@ public class ResponseBodyWrapper {
 			outputStream.write(s.getBytes());
 			size += s.length();
 		} catch (IOException e) {
-			e.printStackTrace();
+			BucketOfShame.accept(e);
 		}
 	}
 
