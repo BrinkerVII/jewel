@@ -16,6 +16,11 @@ import java.util.regex.Pattern;
 public class TemplateProcessor {
 	private static final Pattern STACHE_PATTERN_OUTER = Pattern.compile("(\\{\\{\\s*.*?\\s*}})");
 	private MultiMap<String, Object> providers = new MultiMap<>();
+	private TemplateContext rootContext = null;
+
+	public TemplateProcessor() {
+		rootContext = new TemplateContext(providers);
+	}
 
 	public void provide(Map<String, Object> provider) {
 		providers.appendSource(provider);
@@ -41,7 +46,7 @@ public class TemplateProcessor {
 		for (CandidateEntry candidateEntry : state.getCandidates()) {
 			switch (candidateEntry.getCandidateType()) {
 				case STACHE:
-					StacheElementProcessor stacheElementProcessor = new StacheElementProcessor(this);
+					StacheElementProcessor stacheElementProcessor = new StacheElementProcessor(this, rootContext);
 					tasks.add(() -> {
 						stacheElementProcessor.process(candidateEntry.getNode());
 					});
@@ -77,13 +82,5 @@ public class TemplateProcessor {
 				}
 			}
 		}
-	}
-
-	public Object getValue(String key, Object defaultValue) {
-		if (providers.containsKey(key)) {
-			return providers.get(key);
-		}
-
-		return defaultValue;
 	}
 }

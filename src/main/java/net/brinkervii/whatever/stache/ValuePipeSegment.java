@@ -6,7 +6,6 @@ import net.brinkervii.whatever.stache.piping.StachePipelineStage;
 import net.brinkervii.whatever.stache.piping.StachePipelineState;
 import org.jsoup.nodes.Element;
 
-import java.util.Map;
 import java.util.regex.PatternSyntaxException;
 
 @Slf4j
@@ -17,29 +16,14 @@ public class ValuePipeSegment extends StachePipelineStage {
 
 	@Override
 	public Element pump(Element work) {
-		Map source = null;
-		Object result = null;
-		for (String accesor : bit.split("\\.")) {
-			Object v;
-			if (source == null) {
-				v = state.getTemplateProcessor().getValue(accesor, null);
-			} else {
-				v = source.get(accesor);
-			}
+		Object value = state.getTemplateContext().access(bit);
 
-			if (v instanceof Map) {
-				source = (Map) v;
-			} else {
-				result = v;
-			}
-		}
-
-		if (result != null) {
+		if (value != null) {
 			// String regex = String.format("\\{\\{\\s*%s\\s*}}", bit);
 			String regex = "\\{\\{\\s*" + bit + "\\s*}}";
 
 			try {
-				work.text(work.ownText().replaceAll(regex, result.toString()));
+				work.text(work.ownText().replaceAll(regex, value.toString()));
 			} catch (PatternSyntaxException e) {
 				log.error("Failed to run regex " + regex);
 				BucketOfShame.accept(e);
