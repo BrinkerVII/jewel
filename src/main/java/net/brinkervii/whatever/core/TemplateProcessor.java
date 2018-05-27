@@ -15,10 +15,10 @@ import java.util.regex.Pattern;
 @Slf4j
 public class TemplateProcessor {
 	private static final Pattern STACHE_PATTERN_OUTER = Pattern.compile("(\\{\\{\\s*.*?\\s*}})");
-	private LinkedList<Map<String, Object>> providers = new LinkedList<>();
+	private MultiMap<String, Object> providers = new MultiMap<>();
 
 	public void provide(Map<String, Object> provider) {
-		providers.add(provider);
+		providers.appendSource(provider);
 	}
 
 	public Document process(Document input) {
@@ -80,10 +80,8 @@ public class TemplateProcessor {
 	}
 
 	public Object getValue(String key, Object defaultValue) {
-		for (Map<String, Object> provider : providers) {
-			if (provider.containsKey(key)) {
-				return provider.get(key);
-			}
+		if (providers.containsKey(key)) {
+			return providers.get(key);
 		}
 
 		return defaultValue;
