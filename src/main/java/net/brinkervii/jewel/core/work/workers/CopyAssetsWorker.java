@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Slf4j
-public class CopyAssetsWorker extends JewelWorker {
+public final class CopyAssetsWorker extends JewelWorker {
 	public CopyAssetsWorker(JewelWorkerChain chain) {
 		super(chain);
 	}

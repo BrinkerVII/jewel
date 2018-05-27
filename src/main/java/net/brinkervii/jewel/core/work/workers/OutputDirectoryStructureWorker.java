@@ -7,7 +7,7 @@ import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;
 import java.io.File;
 
 @Slf4j
-public class OutputDirectoryStructureWorker extends JewelWorker {
+public final class OutputDirectoryStructureWorker extends JewelWorker {
 	public OutputDirectoryStructureWorker(JewelWorkerChain chain) {
 		super(chain);
 	}
