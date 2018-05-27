@@ -46,7 +46,7 @@ public class TemplateProcessor {
 						stacheElementProcessor.process(candidateEntry.getNode());
 					});
 					break;
-				case FORLOOP:
+				case STAR_ATTRIB:
 					break;
 				default:
 					break;
@@ -72,8 +72,8 @@ public class TemplateProcessor {
 
 			// Find for loops
 			for (Attribute attribute : element.attributes()) {
-				if (attribute.getKey().equals("*for")) {
-					candidates.add(new CandidateEntry(element, CandidateType.FORLOOP));
+				if (attribute.getKey().startsWith("*")) {
+					candidates.add(new CandidateEntry(element, CandidateType.STAR_ATTRIB));
 				}
 			}
 		}
