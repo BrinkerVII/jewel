@@ -15,7 +15,7 @@ import static java.nio.file.StandardWatchEventKinds.*;
 public class JewelChangeWatcher implements Runnable {
 	private final JewelContext context;
 	private WatchService watcher;
-	private Thread thread;
+	private Thread thread = null;
 	private boolean running = true;
 
 	public JewelChangeWatcher(JewelContext context) {
@@ -49,6 +49,15 @@ public class JewelChangeWatcher implements Runnable {
 	private void shutdown() {
 		log.info("Stopping file watcher");
 		this.running = false;
+
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (thread.isAlive()) {
+			thread.interrupt();
+		}
 	}
 
 	@Override

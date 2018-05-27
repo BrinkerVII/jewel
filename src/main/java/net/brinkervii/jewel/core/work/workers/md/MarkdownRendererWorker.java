@@ -57,10 +57,8 @@ public final class MarkdownRendererWorker extends JewelWorker {
 
 	private HTMLDocument findLayout(String layout) {
 		for (HTMLDocument htmlDocument : chain.getContext().getHtmlDocuments()) {
-			if (htmlDocument.isLayout()) {
-				if (htmlDocument.getFrontMatter().get("layout").equals(layout)) {
-					return htmlDocument;
-				}
+			if (htmlDocument.isLayout() && htmlDocument.getFrontMatter().get("layout").equals(layout)) {
+				return htmlDocument;
 			}
 		}
 

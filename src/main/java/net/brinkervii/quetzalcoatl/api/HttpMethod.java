@@ -14,7 +14,7 @@ public enum HttpMethod {
 
 	public static HttpMethod fromString(String method) {
 		for (HttpMethod httpMethod : HttpMethod.class.getEnumConstants()) {
-			if (httpMethod.toString().toLowerCase().equals(method.toLowerCase().trim())) {
+			if (httpMethod.toString().equalsIgnoreCase(method.toLowerCase().trim())) {
 				return httpMethod;
 			}
 		}

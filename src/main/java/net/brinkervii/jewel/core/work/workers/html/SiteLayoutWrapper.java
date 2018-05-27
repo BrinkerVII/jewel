@@ -29,7 +29,7 @@ public final class SiteLayoutWrapper extends JewelWorker {
 
 		LinkedHashMap<HTMLDocument, HTMLDocument> changes = new LinkedHashMap<>();
 		for (HTMLDocument document : chain.getContext().getHtmlDocuments()) {
-			if (document != siteLayout) {
+			if (!document.equals(siteLayout)) {
 				log.info("Wrapping " + document.getName());
 				try {
 					HTMLDocument newDocument = this.wrapIt(document, siteLayout);

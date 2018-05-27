@@ -16,10 +16,8 @@ public final class SiteLayoutSelectorWorker extends JewelWorker {
 	public void run() {
 		for (HTMLDocument document : chain.getContext().getHtmlDocuments()) {
 			final FrontMatter frontMatter = document.getFrontMatter();
-			if (frontMatter.containsKey("layout")) {
-				if (String.valueOf(frontMatter.get("layout")).equals("site-layout")) {
-					chain.getContext().setSiteLayout(document);
-				}
+			if (frontMatter.containsKey("layout") && String.valueOf(frontMatter.get("layout")).equals("site-layout")) {
+				chain.getContext().setSiteLayout(document);
 			}
 		}
 

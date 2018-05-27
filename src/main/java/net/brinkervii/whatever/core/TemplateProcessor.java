@@ -48,6 +48,8 @@ public class TemplateProcessor {
 					break;
 				case FORLOOP:
 					break;
+				default:
+					break;
 			}
 		}
 

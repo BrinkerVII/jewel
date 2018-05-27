@@ -42,10 +42,8 @@ public class FileAccumulator {
 		for (File file : directory.listFiles()) {
 			if (file.isDirectory()) {
 				accumulate(file, filter, root);
-			} else if (file.isFile()) {
-				if (filter.accept(file, file.getAbsoluteFile().getName())) {
-					addFile(root, file);
-				}
+			} else if (file.isFile() && filter.accept(file, file.getAbsoluteFile().getName())) {
+				addFile(root, file);
 			}
 		}
 	}
