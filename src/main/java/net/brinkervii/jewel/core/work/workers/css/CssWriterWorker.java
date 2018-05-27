@@ -1,7 +1,7 @@
 package net.brinkervii.jewel.core.work.workers.css;
 
 import lombok.extern.slf4j.Slf4j;
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 import net.brinkervii.jewel.core.document.Stylesheet;
 import net.brinkervii.jewel.core.work.driver.JewelWorker;
 import net.brinkervii.jewel.core.work.driver.JewelWorkerChain;

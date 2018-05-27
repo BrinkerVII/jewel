@@ -1,6 +1,6 @@
 package net.brinkervii.jewel.server;
 
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 import net.brinkervii.jewel.core.JewelContext;
 import net.brinkervii.jewel.core.exception.NoChainConstructorException;
 import net.brinkervii.jewel.core.exception.NoJewelChainException;

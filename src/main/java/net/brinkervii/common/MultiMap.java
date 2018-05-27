@@ -1,4 +1,4 @@
-package net.brinkervii.whatever.core;
+package net.brinkervii.common;
 
 import java.util.*;
 

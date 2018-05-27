@@ -2,7 +2,7 @@ package net.brinkervii.jewel.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 import net.brinkervii.jewel.core.config.JewelConfiguration;
 import net.brinkervii.jewel.core.document.HTMLDocument;
 import net.brinkervii.jewel.core.document.MarkdownDocument;

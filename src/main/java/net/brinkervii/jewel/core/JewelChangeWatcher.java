@@ -1,7 +1,7 @@
 package net.brinkervii.jewel.core;
 
 import lombok.extern.slf4j.Slf4j;
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 import net.brinkervii.jewel.core.exception.NoChainConstructorException;
 import net.brinkervii.jewel.core.exception.NoJewelChainException;
 

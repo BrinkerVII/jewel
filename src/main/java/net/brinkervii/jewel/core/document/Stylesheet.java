@@ -1,6 +1,6 @@
 package net.brinkervii.jewel.core.document;
 
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;

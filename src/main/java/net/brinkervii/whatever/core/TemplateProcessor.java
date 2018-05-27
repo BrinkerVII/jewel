@@ -1,6 +1,7 @@
 package net.brinkervii.whatever.core;
 
 import lombok.extern.slf4j.Slf4j;
+import net.brinkervii.common.MultiMap;
 import net.brinkervii.whatever.stache.StacheElementProcessor;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;

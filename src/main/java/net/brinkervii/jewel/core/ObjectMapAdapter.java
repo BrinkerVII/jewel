@@ -1,6 +1,6 @@
 package net.brinkervii.jewel.core;
 
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 
 import java.lang.reflect.Field;
 import java.util.*;

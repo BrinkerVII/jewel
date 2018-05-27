@@ -1,5 +1,7 @@
 package net.brinkervii.whatever.core;
 
+import net.brinkervii.common.MultiMap;
+
 import java.util.Map;
 
 public class TemplateContext extends MultiMap {

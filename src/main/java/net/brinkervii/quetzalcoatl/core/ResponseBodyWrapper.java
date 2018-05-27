@@ -2,7 +2,7 @@ package net.brinkervii.quetzalcoatl.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.brinkervii.BucketOfShame;
+import net.brinkervii.common.BucketOfShame;
 
 import java.io.IOException;
 import java.io.InvalidClassException;
