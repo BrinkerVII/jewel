@@ -11,12 +11,12 @@ public class TemplateContext extends MultiMap {
 		Map source = null;
 		Object result = null;
 
-		for (String accesor : accessorString.split("\\.")) {
+		for (String accessor : accessorString.split("\\.")) {
 			Object v;
 			if (source == null) {
-				v = super.get(accesor);
+				v = super.get(accessor);
 			} else {
-				v = source.get(accesor);
+				v = source.get(accessor);
 			}
 
 			if (v instanceof Map) {
