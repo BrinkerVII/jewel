@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 @Slf4j
 public class StacheElementProcessor extends TemplateElementProcessor {
-	private static final Pattern STACHE_PATTERN_INNER = Pattern.compile("^.*?\\{\\{\\s*(.*?)\\s*}}");
+	private static final Pattern STACHE_PATTERN_INNER = Pattern.compile("\\{\\{\\s*(.*?)\\s*}}");
 
 	public StacheElementProcessor(TemplateProcessor parent) {
 		super(parent);
@@ -24,7 +24,7 @@ public class StacheElementProcessor extends TemplateElementProcessor {
 	@Override
 	public Element process(Element element) {
 		final Matcher matcher = STACHE_PATTERN_INNER.matcher(element.ownText());
-		if (matcher.matches()) {
+		while (matcher.find()) {
 			String stacheContent = matcher.group(1);
 			log.info(String.format("Got stache content %s", stacheContent));
 

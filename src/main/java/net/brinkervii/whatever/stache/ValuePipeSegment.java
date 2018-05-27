@@ -1,11 +1,14 @@
 package net.brinkervii.whatever.stache;
 
+import lombok.extern.slf4j.Slf4j;
 import net.brinkervii.whatever.stache.piping.StachePipelineStage;
 import net.brinkervii.whatever.stache.piping.StachePipelineState;
 import org.jsoup.nodes.Element;
 
 import java.util.Map;
+import java.util.regex.PatternSyntaxException;
 
+@Slf4j
 public class ValuePipeSegment extends StachePipelineStage {
 	public ValuePipeSegment(StachePipelineState state, String bit) {
 		super(state, bit);
@@ -31,7 +34,15 @@ public class ValuePipeSegment extends StachePipelineStage {
 		}
 
 		if (result != null) {
-			work.text(work.ownText().replaceAll(String.format("\\{\\{\\s*%s\\s*}}", bit), result.toString()));
+			// String regex = String.format("\\{\\{\\s*%s\\s*}}", bit);
+			String regex = "\\{\\{\\s*" + bit + "\\s*}}";
+
+			try {
+				work.text(work.ownText().replaceAll(regex, result.toString()));
+			} catch (PatternSyntaxException e) {
+				log.error("Failed to run regex " + regex);
+				e.printStackTrace();
+			}
 		}
 
 		return work;
