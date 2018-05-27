@@ -44,6 +44,16 @@ public final class SassCompilerWorker extends JewelWorker {
 
 		Collection<Importer> importers = Collections.singleton((url, previous) -> {
 			final URI importUri = previous.getImportUri();
+
+			if (url.equals("~/sass_variables")) {
+				try {
+					return importSassVariablesFromConfig(new URI(url));
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+
 			File previousFile = new File(importUri.toString());
 
 			String[] exploded = url.split("/");
@@ -92,5 +102,15 @@ public final class SassCompilerWorker extends JewelWorker {
 		} catch (FileNotFoundException | NotADirectoryException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private Collection<Import> importSassVariablesFromConfig(URI importUri) {
+		final String compiledVars = chain.getContext().config().compileSassVariables();
+
+		return Collections.singleton(new Import(
+			importUri,
+			importUri,
+			compiledVars
+		));
 	}
 }

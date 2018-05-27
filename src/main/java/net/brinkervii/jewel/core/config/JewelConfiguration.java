@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
+import java.util.HashMap;
+
 @Data
 @JsonSerialize
 public class JewelConfiguration {
@@ -15,7 +17,18 @@ public class JewelConfiguration {
 	private String sourceLocation = "src";
 	@JsonProperty("site_properties")
 	private SiteProperties siteProperties = new SiteProperties();
+	@JsonProperty("sass_variables")
+	private HashMap<String, String> sassVariables = new HashMap<>();
 
 	public JewelConfiguration() {
+	}
+
+	public String compileSassVariables() {
+		StringBuilder stringBuilder = new StringBuilder();
+		sassVariables.forEach((key, value) -> {
+			stringBuilder.append(String.format("$%s: %s;", key, value)).append('\n');
+		});
+
+		return stringBuilder.toString();
 	}
 }
