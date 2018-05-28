@@ -75,7 +75,7 @@ public class FileServerServlet extends Servlet {
 			});
 		} catch (IOException e) {
 			BucketOfShame.accept(e);
-			response.status(500).writer(responseBody -> responseBody.string("General failure"));
+			response.status(500).writer(responseBody -> responseBody.string("General failure on site " + context.config().getSiteProperties().getTitle()));
 		}
 
 		return response;

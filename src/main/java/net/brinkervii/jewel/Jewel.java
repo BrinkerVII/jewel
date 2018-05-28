@@ -24,11 +24,7 @@ public class Jewel implements Runnable {
 		main.start();
 
 		JewelServer server = new JewelServer(context);
-		try {
-			server.init();
-		} catch (IOException e) {
-			BucketOfShame.accept(e);
-		}
+		server.init();
 
 		final JewelChangeWatcher jewelChangeWatcher = new JewelChangeWatcher(context);
 		try {

@@ -20,9 +20,6 @@ public class JewelConfiguration {
 	@JsonProperty("sass_variables")
 	private HashMap<String, String> sassVariables = new HashMap<>();
 
-	public JewelConfiguration() {
-	}
-
 	public String compileSassVariables() {
 		StringBuilder stringBuilder = new StringBuilder();
 		sassVariables.forEach((key, value) -> {

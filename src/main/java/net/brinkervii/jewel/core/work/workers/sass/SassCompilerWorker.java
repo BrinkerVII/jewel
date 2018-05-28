@@ -81,10 +81,6 @@ public final class SassCompilerWorker extends JewelWorker {
 				for (File file : files) {
 					final FileInputStream fileInputStream;
 					try {
-						fileInputStream = new FileInputStream(file);
-						final String scss = IOUtils.toString(fileInputStream, StandardCharsets.UTF_8);
-						fileInputStream.close();
-
 						final Compiler compiler = new Compiler();
 						final Output output = compiler.compileFile(file.toURI(), new URI("out.css"), options);
 
@@ -94,7 +90,7 @@ public final class SassCompilerWorker extends JewelWorker {
 
 						chain.getContext().stylesheet(stylesheet);
 						log.info(String.format("Added compiled SASS file %s", file.getName()));
-					} catch (IOException | CompilationException | URISyntaxException e) {
+					} catch (CompilationException | URISyntaxException e) {
 						BucketOfShame.accept(e);
 					}
 

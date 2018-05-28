@@ -14,10 +14,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class INIReader extends LinkedHashSet<INIReader.Section> {
 	private Section activeSection = null;
 
-	public INIReader() {
-
-	}
-
 	public void load(File file) throws IOException {
 		try (FileInputStream inputStream = new FileInputStream(file)) {
 			loadString(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
