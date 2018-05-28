@@ -79,7 +79,6 @@ public final class SassCompilerWorker extends JewelWorker {
 
 			accumulator.accumulate(new SassFilenameFilter()).getFiles().forEach((root, files) -> {
 				for (File file : files) {
-					final FileInputStream fileInputStream;
 					try {
 						final Compiler compiler = new Compiler();
 						final Output output = compiler.compileFile(file.toURI(), new URI("out.css"), options);
