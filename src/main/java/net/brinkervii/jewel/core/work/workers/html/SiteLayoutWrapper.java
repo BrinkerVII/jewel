@@ -63,6 +63,7 @@ public final class SiteLayoutWrapper extends JewelWorker {
 		}
 
 		final HTMLDocument wrappedDocument = HTMLDocument.fromString(document.getOrigin(), document.getSourceFile(), result.toString(), document);
+		document.copyHEADTags(wrappedDocument);
 		if (document.shouldWrite()) wrappedDocument.alwaysWrite();
 
 		return wrappedDocument;

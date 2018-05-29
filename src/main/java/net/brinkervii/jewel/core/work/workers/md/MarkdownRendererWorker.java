@@ -20,21 +20,21 @@ public final class MarkdownRendererWorker extends JewelWorker {
 		for (MarkdownDocument document : chain.getContext().getMarkdownDocuments()) {
 			final FrontMatter frontMatter = document.getFrontMatter();
 
-			Document resultDOM = null;
+			Document layoutDOM = null;
 			if (frontMatter.containsKey("layout")) {
 				final HTMLDocument layout = findLayout(frontMatter.get("layout"));
 
 				if (layout != null) {
-					resultDOM = layout.getSoup().clone();
+					layoutDOM = layout.getSoup().clone();
+					layout.copyHEADTags(layoutDOM);
 				}
-
 			}
 
-			if (resultDOM == null) {
-				resultDOM = Jsoup.parse("<jewel-content></jewel-content>");
+			if (layoutDOM == null) {
+				layoutDOM = Jsoup.parse("<jewel-content></jewel-content>");
 			}
 
-			for (Element contentTag : resultDOM.getElementsByTag("jewel-content")) {
+			for (Element contentTag : layoutDOM.getElementsByTag("jewel-content")) {
 				Element parent = contentTag.parent();
 
 				for (Element documentElement : document.getSoup().body().children()) {
@@ -47,7 +47,7 @@ public final class MarkdownRendererWorker extends JewelWorker {
 			HTMLDocument render = HTMLDocument.fromString(
 				document.getOrigin(),
 				FileUtil.changeExtension(document.getSourceFile(), "html"),
-				resultDOM.outerHtml(), document
+				layoutDOM.outerHtml(), document
 			);
 			render.alwaysWrite();
 
