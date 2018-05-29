@@ -41,6 +41,10 @@ public final class MarkdownRendererWorker extends JewelWorker {
 					parent.appendChild(documentElement.clone());
 				}
 
+				if (!parent.classNames().contains("jewel-md")) {
+					parent.addClass("jewel-md");
+				}
+
 				contentTag.remove();
 			}
 
