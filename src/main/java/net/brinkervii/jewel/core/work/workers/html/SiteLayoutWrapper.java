@@ -58,8 +58,12 @@ public final class SiteLayoutWrapper extends JewelWorker {
 		targetElement = targetElement.parent();
 		jcontent.remove();
 
-		for (Element element : soup.body().children()) {
-			targetElement.appendChild(element.clone());
+		if (soup.body().children().size() <= 0) {
+			targetElement.text(soup.body().ownText());
+		} else {
+			for (Element element : soup.body().children()) {
+				targetElement.appendChild(element.clone());
+			}
 		}
 
 		final HTMLDocument wrappedDocument = HTMLDocument.fromString(document.getOrigin(), document.getSourceFile(), result.toString(), document);
