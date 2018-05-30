@@ -19,15 +19,22 @@ public final class CopyAssetsWorker extends JewelWorker {
 	public void run() {
 		log.info("Copying assets");
 
+		File themeAssetsDirectory = new File(chain.getContext().config().getThemeLocation(), "assets");
 		File sourceAssetsDirectory = new File(chain.getContext().config().getSourceLocation(), "assets");
-		if (sourceAssetsDirectory.exists()) {
+
+		this.doCopy(themeAssetsDirectory);
+		this.doCopy(sourceAssetsDirectory);
+	}
+
+	private void doCopy(File directory) {
+		if (directory.exists()) {
 			File outputAssetsDirectory = new File(chain.getContext().getOutputDirectory(), "assets");
 			if (!outputAssetsDirectory.exists()) {
 				outputAssetsDirectory.mkdirs();
 			}
 
 			try {
-				FileUtils.copyDirectory(sourceAssetsDirectory, outputAssetsDirectory);
+				FileUtils.copyDirectory(directory, outputAssetsDirectory);
 			} catch (IOException e) {
 				BucketOfShame.accept(e);
 			}
